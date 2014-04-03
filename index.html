@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html>
-	<head></head>	
+<!Doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>RoomFly</title>
+  <meta name="description" content="RoomFly">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
+  <script src = 'js/bootstrap.js'></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script><!--Always include this in html file-->
+</head>
 
-	<body>
-		<h1>EECS 394: Team Red</h1>
-		<p>This is our project webpage.</p>
-	</body>
+<body>
+  
+  <div id="main">
+    <h1>EECS 394: Team Red</h1>
+    <p>This is our project webpage. We have now set up Parse as our backend</p>
+  </div>
+
+  <script type="text/javascript">
+    Parse.initialize("5MNUsdB3qz6kL41pxhDJoqlwDvXWtJHMDpGgzdeD", "GO5LTjCytXqxqzVO3v6DIJX6LHv68S5pJB8WTzdQ");
+    
+    var TestObject = Parse.Object.extend("TestObject");
+    var testObject = new TestObject();
+      /*testObject.save({foo: "bar"}, {
+      success: function(object) {
+        $(".success").show();
+      },
+      error: function(model, error) {
+        $(".error").show();
+      }
+    });*/
+  </script>
+</body>
+
 </html>
-
