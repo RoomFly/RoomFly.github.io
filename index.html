@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <title>RoomFly</title>
   <meta name="description" content="RoomFly">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/datepicker.css">
   <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
@@ -75,6 +75,9 @@
     <script type="text/javascript">
     Parse.initialize("5MNUsdB3qz6kL41pxhDJoqlwDvXWtJHMDpGgzdeD", "GO5LTjCytXqxqzVO3v6DIJX6LHv68S5pJB8WTzdQ");
     $('#dp3').datepicker();
+    $('#dp3').focusout(function(){
+      $('#dp3').datepicker('hide');
+    });
 
     var TestObject = Parse.Object.extend("TestObject");
     var testObject = new TestObject();
