@@ -5,39 +5,79 @@
   <meta name="description" content="RoomFly">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/datepicker.css">
   <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
   <script src = 'js/bootstrap.js'></script>
-  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script><!--Always include this in html file-->
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script><!--Always include this 
+  in html file-->
+  <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
 </head>
 
 <body>
-  
+
   <div id="main">
     <h1>EECS 394: Team Red</h1>
     <p>This is our project webpage. We have now set up Parse as our backend</p>
   </div>
 
   <div class="panel-group" id="accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-          Filters
-        </a>
-      </h4>
-      
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
-      <div class="panel-body">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            Filters
+          </a>
+        </h4>
       </div>
+      <div id="collapseOne" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <form class="form-horizontal" role="form">
+            <div class="form-group">
+              <label for="inputEmail3" class="col-sm-2 control-label">Size: </label>
+              <select class="form-control">
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+              </select>
+            </div>
+            <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+              <input class="span2" size="16" type="text" value="12-02-2012">
+              <span class="add-on"><i class="icon-th"></i></span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="list-group">
+    <a href="#" class="list-group-item active">
+      Date and Time
+    </a>
+    <div href="#" class="list-group-item">
+      LR 2
+      <input="button" class="btn btn-default pull-right">Reserve</input>
+    </div>
+    <div href="#" class="list-group-item">M166
+      <input="button" class="btn btn-default pull-right">Reserve</input>
+    </div>
+    <div>
+    <div href="#" class="list-group-item">M164
+      <input="button" class="btn btn-default pull-right">Reserve</input>
+    </div>
+    <div href="#" class="list-group-item">LR 3
+      <input="button" class="btn btn-default pull-right">Reserve</input>
+    </div>
+    <div href="#" class="list-group-item">LR 4
+      <input="button" class="btn btn-default pull-right">Reserve</input>
     </div>
   </div>
 
   <script type="text/javascript">
-    Parse.initialize("5MNUsdB3qz6kL41pxhDJoqlwDvXWtJHMDpGgzdeD", "GO5LTjCytXqxqzVO3v6DIJX6LHv68S5pJB8WTzdQ");
-    
-    var TestObject = Parse.Object.extend("TestObject");
-    var testObject = new TestObject();
+  Parse.initialize("5MNUsdB3qz6kL41pxhDJoqlwDvXWtJHMDpGgzdeD", "GO5LTjCytXqxqzVO3v6DIJX6LHv68S5pJB8WTzdQ");
+  $('#id3').datepicker();
+
+  var TestObject = Parse.Object.extend("TestObject");
+  var testObject = new TestObject();
       /*testObject.save({foo: "bar"}, {
       success: function(object) {
         $(".success").show();
@@ -46,7 +86,7 @@
         $(".error").show();
       }
     });*/
-  </script>
+</script>
 </body>
 
 </html>
