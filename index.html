@@ -16,7 +16,7 @@
 <body>
 
   <div id="main">
-    <h1>Welcome Roomfly!</h1>
+    <h1>Welcome RoomFly!</h1>
   </div>
 
   <div class="panel-group" id="accordion">
@@ -48,15 +48,15 @@
           </div>
           <div class="col-xs-4">
             <select class="col-xs-6 form-control">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
-              <option>8</option>
-              <option>9</option>
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06</option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
               <option>10</option>
               <option>11</option>
               <option>12</option>
@@ -81,24 +81,39 @@
 
   <div class="list-group">
     <a href="#" class="list-group-item active">
-      Date and Time
+      Available Rooms at DATE and TIME
     </a>
     <div href="#" class="list-group-item">
       LR 2
-      <input="button" class="btn btn-default pull-right">Reserve</input>
+      <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
     </div>
     <div href="#" class="list-group-item">M166
-      <input="button" class="btn btn-default pull-right">Reserve</input>
+      <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
     </div>
-    <div>
-      <div href="#" class="list-group-item">M164
-        <input="button" class="btn btn-default pull-right">Reserve</input>
-      </div>
-      <div href="#" class="list-group-item">LR 3
-        <input="button" class="btn btn-default pull-right">Reserve</input>
-      </div>
-      <div href="#" class="list-group-item">LR 4
-        <input="button" class="btn btn-default pull-right">Reserve</input>
+    <div href="#" class="list-group-item">M164
+      <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
+    </div>
+    <div href="#" class="list-group-item">LR 3
+      <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
+    </div>
+    <div href="#" class="list-group-item">LR 4
+      <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="myModalLabel">Reserve Room</h4>
+          </div>
+          <div class="modal-body">
+            <a href="https://25live.collegenet.com/northwestern/">Click here</a> to go to 25 Live and reserve the room.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -106,8 +121,8 @@
     $("#dp3").datepicker({
       autoclose: true,
     });
-</script>
-<script src = 'js/Parse.js'></script>
-</body>
+    </script>
+    <script src = 'js/Parse.js'></script>
+  </body>
 
-</html>
+  </html>
