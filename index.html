@@ -8,7 +8,8 @@
   <!-- CSS -->
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/datepicker.css">
-  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css" />
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css"/>
+  <link rel="stylesheet" href="css/index.css"/>
 
   <!-- JavaScript -->
   <script src = 'js/bootstrap.js'></script>
@@ -132,26 +133,35 @@
   </div>
 
   <!-- Available Room List -->
-  <div class="list-group">
+  <div class="list-group" id="room-list">
     <a href="#" class="list-group-item active">
       Available Rooms at DATE and TIME
     </a>
-    <div href="#" class="list-group-item">
-      LR 2
+    <div class="list-group-item room-row">
+      <span class="col-xs-2">Name: LR2</span>
+      <span class="col-xs-2">Size: 100+</span>
+      <span class="col-xs-2">Building: TECH</span>
       <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
     </div>
-    <div href="#" class="list-group-item">M166
+    <div class="list-group-item room-row">
+      <span class="col-xs-2">Name: LR3</span>
+      <span class="col-xs-2">Size: 50+</span>
+      <span class="col-xs-2">Building: TECH</span>
       <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
     </div>
-    <div href="#" class="list-group-item">M164
+    <div class="list-group-item room-row">
+      <span class="col-xs-2">Name: LR4</span>
+      <span class="col-xs-2">Size: 50+</span>
+      <span class="col-xs-2">Building: TECH</span>
       <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
     </div>
-    <div href="#" class="list-group-item">LR 3
+    <div class="list-group-item room-row">
+      <span class="col-xs-2">Name: M166</span>
+      <span class="col-xs-2">Size: 50+</span>
+      <span class="col-xs-2">Building: TECH</span>
       <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
     </div>
-    <div href="#" class="list-group-item">LR 4
-      <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
-    </div>
+    
 
     <!-- Reserve Room Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -171,62 +181,7 @@
       </div>
     </div>
 
-    <script type="text/javascript">
-
-    $( "#dp3" ).datepicker({ minDate: 0});
-    $("#dp3").val(getToday());
-    $("#submit").click(getFilterVals());
-    
-    function getToday() {
-      var today = new Date();
-      var dd = today.getDate();
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      if (dd < 10) {
-        dd = '0' + dd;
-      }
-
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-
-      today = mm + '/' + dd + '/' + yyyy;
-      return today;
-    }
-  
-    function getFilterVals() {
-      var size = $("#size").val();
-      date = $("#dp3").datepicker('getDate'),
-      startTime = convertTime($("#start-hour").val(), $("#start-minute").val(), $("#start-ampm").val()),
-      endTime = convertTime($("#end-hour").val(), $("#end-minute").val(), $("#end-ampm").val());
-      return {
-        size: size,
-        date: date,
-        startTime: startTime,
-        endTime: endTime
-      };
-      // return size;
-    }
-
-    function convertTime(hour, minute, ampm) {
-      var time = hour + ":" + minute + " " + ampm;
-      var hours = Number(time.match(/^(\d+)/)[1]);
-      var minutes = Number(time.match(/:(\d+)/)[1]);
-      var AMPM = time.match(/\s(.*)$/)[1];
-      if(AMPM == "PM" && hours<12) hours = hours+12;
-      if(AMPM == "AM" && hours==12) hours = hours-12;
-      var sHours = hours.toString();
-      var sMinutes = minutes.toString();
-      if(hours<10) sHours = "0" + sHours;
-      if(minutes<10) sMinutes = "0" + sMinutes; 
-      return {
-        hour: sHours,
-        minute: sMinutes
-      };
-    }
-
-    </script>
-    <script src = 'js/Parse.js'></script>
+  <script src = 'js/Parse.js'></script>
+  <script src ='js/index.js'></script>
   </body>
-
-  </html>
+</html>
