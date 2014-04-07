@@ -30,87 +30,91 @@
       </div>
       <div id="collapseOne" class="panel-collapse collapse in">
         <div class="panel-body">
-          <div class="form-group">
-            <label class="control-label">Size: </label>
-            <select class="form-control">
-              <option>Small</option>
-              <option>Medium</option>
-              <option>Large</option>
-            </select>
-          </div>
-          <label class="control-label">Date: </label>
-          <div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-            <input readonly="true" class="form-control" id="dp3" type="text" value="12-02-2012">
-            <span class="add-on"><i class="icon-th"></i></span>
-          </div>
-          <div>
-            <label class="control-label">Time: </label>
-          </div>
-          <div>
-            <label class="control-label">To: </label>
-          </div>
-          <div class="col-xs-4">
-            <select class="col-xs-6 form-control">
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-              <option>05</option>
-              <option>06</option>
-              <option>07</option>
-              <option>08</option>
-              <option>09</option>
-              <option>10</option>
-              <option>11</option>
-              <option>12</option>
-            </select>
-          </div>
-          <div class="col-xs-4">
-            <select class="form-control">
-              <option>00</option>
-              <option>30</option>
-            </select>
-          </div>
-          <div class="col-xs-4">
-            <select class="form-control">
-              <option>AM</option>
-              <option>PM</option>
-            </select>
-          </div>
-          <div>
-            <label class="control-label">From: </label>
-          </div>
-          <div class="col-xs-4">
-            <select class="col-xs-6 form-control">
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-              <option>05</option>
-              <option>06</option>
-              <option>07</option>
-              <option>08</option>
-              <option>09</option>
-              <option>10</option>
-              <option>11</option>
-              <option>12</option>
-            </select>
-          </div>
-          <div class="col-xs-4">
-            <select class="form-control">
-              <option>00</option>
-              <option>30</option>
-            </select>
-          </div>
-          <div class="col-xs-4">
-            <select class="form-control">
-              <option>AM</option>
-              <option>PM</option>
-            </select>
-          </div>
-          <div>
-            <button class="btn btn-default">Submit</button>
-          </div>
+          <form>
+            <div class="form-group">
+              <label class="control-label">Size: </label>
+              <select id="size" class="form-control">
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+              </select>
+            </div>
+            <label class="control-label">Date: </label>
+            <div class="input-append date" id="dp3" data-date-format="dd-mm-yyyy">
+              <div class="input-group">
+                <input id="date-input" class="form-control" type="text"></input>
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+              </div>
+            </div>
+            <div>
+              <label class="control-label">Time: </label>
+            </div>
+            <div>
+              <label class="control-label">To: </label>
+            </div>
+            <div class="col-xs-4">
+              <select id="start-hour" class="col-xs-6 form-control">
+                <option>01</option>
+                <option>02</option>
+                <option>03</option>
+                <option>04</option>
+                <option>05</option>
+                <option>06</option>
+                <option>07</option>
+                <option>08</option>
+                <option>09</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+              </select>
+            </div>
+            <div class="col-xs-4">
+              <select id="start-minute" class="form-control">
+                <option>00</option>
+                <option>30</option>
+              </select>
+            </div>
+            <div class="col-xs-4">
+              <select id="start-ampm" class="form-control">
+                <option>AM</option>
+                <option>PM</option>
+              </select>
+            </div>
+            <div>
+              <label class="control-label">From: </label>
+            </div>
+            <div class="col-xs-4">
+              <select id="end-hour" class="col-xs-6 form-control">
+                <option>01</option>
+                <option>02</option>
+                <option>03</option>
+                <option>04</option>
+                <option>05</option>
+                <option>06</option>
+                <option>07</option>
+                <option>08</option>
+                <option>09</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+              </select>
+            </div>
+            <div class="col-xs-4">
+              <select id="end-minute" class="form-control">
+                <option>00</option>
+                <option>30</option>
+              </select>
+            </div>
+            <div class="col-xs-4">
+              <select id="end-ampm" class="form-control">
+                <option>AM</option>
+                <option>PM</option>
+              </select>
+            </div>
+            <div>
+              <submit id="submit" class="btn btn-default">Submit</submit>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -155,9 +159,53 @@
     </div>
 
     <script type="text/javascript">
-    $("#dp3").datepicker({
-      autoclose: true,
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    today = mm + '-' + dd + '-' + yyyy;
+
+    $("#submit").click(function() {
+      var size = $("#size").val(),
+      date = $("#dp3").datepicker('getDate'),
+      startTime = convertTime($("#start-hour").val(), $("#start-minute").val(), $("#start-ampm").val()),
+      endTime = convertTime($("#end-hour").val(), $("#end-minute").val(), $("#end-ampm").val());
     });
+
+    $("#dp3").datepicker({
+      orientation: "left",
+      autoclose: true,
+      startDate: new Date(),
+      todayHighlight: true
+    });
+
+    $("#date-input").val(today);
+
+    //WE NEED TO WRITE THIS FUNCTION
+    function convertTime(hour, minute, ampm) {
+      var time = hour + ":" + minute + " " + ampm;
+      var hours = Number(time.match(/^(\d+)/)[1]);
+      var minutes = Number(time.match(/:(\d+)/)[1]);
+      var AMPM = time.match(/\s(.*)$/)[1];
+      if(AMPM == "PM" && hours<12) hours = hours+12;
+      if(AMPM == "AM" && hours==12) hours = hours-12;
+      var sHours = hours.toString();
+      var sMinutes = minutes.toString();
+      if(hours<10) sHours = "0" + sHours;
+      if(minutes<10) sMinutes = "0" + sMinutes; 
+      return {
+        hour: sHours,
+        minute: sMinutes
+      };
+    }
     </script>
     <script src = 'js/Parse.js'></script>
   </body>
