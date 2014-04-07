@@ -16,8 +16,7 @@
 <body>
 
   <div id="main">
-    <h1>EECS 394: Team Red</h1>
-    <p>This is our project webpage. We have now set up Parse as our backend</p>
+    <h1>Welcome Roomfly!</h1>
   </div>
 
   <div class="panel-group" id="accordion">
@@ -31,24 +30,25 @@
       </div>
       <div id="collapseOne" class="panel-collapse collapse in">
         <div class="panel-body">
-          <form class="form-horizontal" role="form">
-            <div class="form-group">
-              <label for="inputEmail3" class="col-sm-2 control-label">Size: </label>
-              <select class="form-control">
-                <option>Small</option>
-                <option>Medium</option>
-                <option>Large</option>
-              </select>
-            </div>
-            <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-              <input class="span2" size="16" type="text" value="12-02-2012">
-              <span class="add-on"><i class="icon-th"></i></span>
-            </div>
-          </form>
+          <div class="form-group">
+            <label class="control-label">Size: </label>
+            <select class="form-control">
+              <option>Small</option>
+              <option>Medium</option>
+              <option>Large</option>
+            </select>
+          </div>
+          <label class="control-label">Date: </label>
+          <div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+            <input class="form-control" id="dp3" type="text" value="12-02-2012">
+            <span class="add-on"><i class="icon-th"></i></span>
+          </div>
+          <label class="control-label">Time: </label>
         </div>
       </div>
     </div>
   </div>
+
   <div class="list-group">
     <a href="#" class="list-group-item active">
       Date and Time
@@ -61,23 +61,23 @@
       <input="button" class="btn btn-default pull-right">Reserve</input>
     </div>
     <div>
-    <div href="#" class="list-group-item">M164
-      <input="button" class="btn btn-default pull-right">Reserve</input>
+      <div href="#" class="list-group-item">M164
+        <input="button" class="btn btn-default pull-right">Reserve</input>
+      </div>
+      <div href="#" class="list-group-item">LR 3
+        <input="button" class="btn btn-default pull-right">Reserve</input>
+      </div>
+      <div href="#" class="list-group-item">LR 4
+        <input="button" class="btn btn-default pull-right">Reserve</input>
+      </div>
     </div>
-    <div href="#" class="list-group-item">LR 3
-      <input="button" class="btn btn-default pull-right">Reserve</input>
-    </div>
-    <div href="#" class="list-group-item">LR 4
-      <input="button" class="btn btn-default pull-right">Reserve</input>
-    </div>
-  </div>
 
-  <script type="text/javascript">
-  Parse.initialize("5MNUsdB3qz6kL41pxhDJoqlwDvXWtJHMDpGgzdeD", "GO5LTjCytXqxqzVO3v6DIJX6LHv68S5pJB8WTzdQ");
-  $('#id3').datepicker();
+    <script type="text/javascript">
+    Parse.initialize("5MNUsdB3qz6kL41pxhDJoqlwDvXWtJHMDpGgzdeD", "GO5LTjCytXqxqzVO3v6DIJX6LHv68S5pJB8WTzdQ");
+    $('#dp3').datepicker();
 
-  var TestObject = Parse.Object.extend("TestObject");
-  var testObject = new TestObject();
+    var TestObject = Parse.Object.extend("TestObject");
+    var testObject = new TestObject();
       /*testObject.save({foo: "bar"}, {
       success: function(object) {
         $(".success").show();
