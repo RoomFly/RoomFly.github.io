@@ -43,7 +43,37 @@
             <input class="form-control" id="dp3" type="text" value="12-02-2012">
             <span class="add-on"><i class="icon-th"></i></span>
           </div>
-          <label class="control-label">Time: </label>
+          <div>
+            <label class="control-label">Time: </label>
+          </div>
+          <div class="col-xs-5">
+            <select class="col-xs-6 form-control">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </select>
+          </div>
+          <div class="col-xs-5">
+            <select class="form-control">
+              <option>00</option>
+              <option>30</option>
+            </select>
+          </div>
+          <div class="col-xs-2">
+            <select class="form-control">
+              <option>AM</option>
+              <option>PM</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
@@ -75,15 +105,7 @@
     <script type="text/javascript">
     Parse.initialize("5MNUsdB3qz6kL41pxhDJoqlwDvXWtJHMDpGgzdeD", "GO5LTjCytXqxqzVO3v6DIJX6LHv68S5pJB8WTzdQ");
     $("#dp3").datepicker({
-      showOn: 'button',
-      onClose: function(dateText, inst) 
-      { 
-        $(this).attr("disabled", false);
-      },
-      beforeShow: function(input, inst) 
-      {
-        $(this).attr("disabled", true);
-      }
+      autoclose: true,
     });
 
     var TestObject = Parse.Object.extend("TestObject");
