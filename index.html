@@ -4,17 +4,20 @@
   <title>RoomFly</title>
   <meta name="description" content="RoomFly">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-  
+
   <!-- CSS -->
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/datepicker.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css" />
 
   <!-- JavaScript -->
-  <script type="text/javascript" src="js/jquery-1.11.0.js"></script>
   <script src = 'js/bootstrap.js'></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+  <!-- // <script type="text/javascript" src="js/jquery-1.11.0.js"></script> -->
   <!--Always include this in html file-->
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+  <!-- // <script type="text/javascript" src="js/bootstrap-datepicker.js"></script> -->
 </head>
 
 <body>
@@ -23,7 +26,7 @@
     <h2>Welcome RoomFly!</h2>
   </div>
 
-  <!-- Filter Collapse -->
+  <!-- Room Filters -->
   <div class="panel-group" id="accordion">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -35,99 +38,95 @@
       </div>
       <div id="collapseOne" class="panel-collapse collapse in">
         <div class="panel-body">
-          <form>
+          <div class="form-group">
 
             <!-- Size Filter -->
-            <div class="form-group">
-              <label class="control-label">Size: </label>
-              <select id="size" class="form-control">
-                <option>Small</option>
-                <option>Medium</option>
-                <option>Large</option>
-              </select>
-            </div>
+            <label class="control-label">Size: </label>
+            <select class="form-control">
+              <option>Small</option>
+              <option>Medium</option>
+              <option>Large</option>
+            </select>
+          </div>
 
-            <!-- Date Filter -->
-            <label class="control-label">Date: </label>
-            <div class="input-append date" id="dp3" data-date-format="dd-mm-yyyy">
-              <div class="input-group">
-                <input id="date-input" class="form-control" type="text"></input>
-                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-              </div>
-            </div>
-            
-            <!-- Time Filter -->
-            <div>
-              <label class="control-label">Time: </label>
-            </div>
-            <div>
-              <label class="control-label">To: </label>
-            </div>
-            <div class="col-xs-4">
-              <select id="start-hour" class="col-xs-6 form-control">
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-                <option>04</option>
-                <option>05</option>
-                <option>06</option>
-                <option>07</option>
-                <option>08</option>
-                <option>09</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
-              </select>
-            </div>
-            <div class="col-xs-4">
-              <select id="start-minute" class="form-control">
-                <option>00</option>
-                <option>30</option>
-              </select>
-            </div>
-            <div class="col-xs-4">
-              <select id="start-ampm" class="form-control">
-                <option>AM</option>
-                <option>PM</option>
-              </select>
-            </div>
-            <div>
-              <label class="control-label">From: </label>
-            </div>
-            <div class="col-xs-4">
-              <select id="end-hour" class="col-xs-6 form-control">
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-                <option>04</option>
-                <option>05</option>
-                <option>06</option>
-                <option>07</option>
-                <option>08</option>
-                <option>09</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
-              </select>
-            </div>
-            <div class="col-xs-4">
-              <select id="end-minute" class="form-control">
-                <option>00</option>
-                <option>30</option>
-              </select>
-            </div>
-            <div class="col-xs-4">
-              <select id="end-ampm" class="form-control">
-                <option>AM</option>
-                <option>PM</option>
-              </select>
-            </div>
-            
-            <!-- Submit -->
-            <div>
-              <submit id="submit" class="btn btn-default">Submit</submit>
-            </div>
-          </form>
+          <!-- Date Filter -->
+          <label class="control-label">Date: </label>
+          <div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+            <input readonly="true" class="form-control" id="dp3" type="text" value="12-02-2012">
+            <span class="add-on"><i class="icon-th"></i></span>
+          </div>
+          
+          <!-- Time Filter -->
+          <div>
+            <label class="control-label">Time: </label>
+          </div>
+          <div>
+            <label class="control-label">To: </label>
+          </div>
+          <div class="col-xs-4">
+            <select class="col-xs-6 form-control">
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06</option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </select>
+          </div>
+          <div class="col-xs-4">
+            <select class="form-control">
+              <option>00</option>
+              <option>30</option>
+            </select>
+          </div>
+          <div class="col-xs-4">
+            <select class="form-control">
+              <option>AM</option>
+              <option>PM</option>
+            </select>
+          </div>
+          <div>
+            <label class="control-label">From: </label>
+          </div>
+          <div class="col-xs-4">
+            <select class="col-xs-6 form-control">
+              <option>01</option>
+              <option>02</option>
+              <option>03</option>
+              <option>04</option>
+              <option>05</option>
+              <option>06</option>
+              <option>07</option>
+              <option>08</option>
+              <option>09</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </select>
+          </div>
+          <div class="col-xs-4">
+            <select class="form-control">
+              <option>00</option>
+              <option>30</option>
+            </select>
+          </div>
+          <div class="col-xs-4">
+            <select class="form-control">
+              <option>AM</option>
+              <option>PM</option>
+            </select>
+          </div>
+          
+          <!-- Submit -->
+          <div>
+            <button class="btn btn-default">Submit</button>
+          </div>
         </div>
       </div>
     </div>
@@ -138,7 +137,8 @@
     <a href="#" class="list-group-item active">
       Available Rooms at DATE and TIME
     </a>
-    <div href="#" class="list-group-item">LR 2
+    <div href="#" class="list-group-item">
+      LR 2
       <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
     </div>
     <div href="#" class="list-group-item">M166
@@ -173,6 +173,10 @@
     </div>
 
     <script type="text/javascript">
+
+    $( "#dp3" ).datepicker({ minDate: 0});
+    $("#date-input").val(today);
+    
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
@@ -187,21 +191,20 @@
 
     today = mm + '-' + dd + '-' + yyyy;
 
-    $("#submit").click(function() {
+    $("#submit").click(getFilterVals());
+
+    function getFilterVals() {
       var size = $("#size").val(),
       date = $("#dp3").datepicker('getDate'),
       startTime = convertTime($("#start-hour").val(), $("#start-minute").val(), $("#start-ampm").val()),
       endTime = convertTime($("#end-hour").val(), $("#end-minute").val(), $("#end-ampm").val());
-    });
-
-    $("#dp3").datepicker({
-      orientation: "left",
-      autoclose: true,
-      startDate: new Date(),
-      todayHighlight: true
-    });
-
-    $("#date-input").val(today);
+      return {
+        size: size,
+        date: date,
+        startTime: startTime,
+        endTime: endTime
+      }
+    }
 
     function convertTime(hour, minute, ampm) {
       var time = hour + ":" + minute + " " + ampm;
@@ -219,6 +222,7 @@
         minute: sMinutes
       };
     }
+
     </script>
     <script src = 'js/Parse.js'></script>
   </body>
