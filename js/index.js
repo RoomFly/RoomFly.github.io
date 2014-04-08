@@ -87,10 +87,10 @@ function buildRoomRow(room) {
   maxCapacity = room.capacity,
   spaceID = room.space_id,
   location = room.location;
-  $("#room-list").append('<div class="list-group-item room-row">' +
-    '<span class="col-xs-2 room-row-labels">Name: <span class="room-row-content">' + name + '</span> </span>' + 
-    '<span class="col-xs-2 room-row-labels">Size: <span class="room-row-content">' + maxCapacity + '</span> </span>' + 
-    '<span class="col-xs-2 room-row-labels">Building: <span class="room-row-content">' + location + '</span> </span>' +
+  $("#room-list").append('<div class="list-group-item room-row container-fluid">' +
+    '<span class="col-sm-2 room-row-labels">Name: <span class="room-row-content">' + name + '</span> </span>' + 
+    '<span class="col-sm-2 room-row-labels">Size: <span class="room-row-content">' + maxCapacity + '</span> </span>' + 
+    '<span class="col-sm-2 room-row-labels">Building: <span class="room-row-content">' + location + '</span> </span>' +
     '<button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>' +
     '</div>');
 }
