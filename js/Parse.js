@@ -22,7 +22,14 @@ function querySize(size,queryResult){
         
         var x = queryResult.indexOf(results[i].id);
         if(x>=0){
-          availableRooms.push(results[i]);
+          var roomObj = {
+            room_size :results[i].get("size"),
+            capacity: results[i].get("capacity"),
+            name:results[i].get("room_name"),
+            location :results[i].get("room_location"),
+            space_id: results[i].get("space_id")
+          };
+          availableRooms.push(roomObj);
         }
       }
     },
