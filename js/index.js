@@ -7,6 +7,19 @@ $("#submit").click(function(){
 
 });
 
+function createRoomRow(room) {
+  var rBuilding = room.get('room_location');
+  var rSize = room.get('size');
+  var rName = room.get('room_name'); 
+
+  var list = $('#room-list');
+
+  var rowHtml = "<div class=\"list-group-item room-row\"><span class=\"col-xs-2 room-row-labels\">Name: <span class=\"room-row-content\">" + rName + "</span> </span><span class=\"col-xs-2 room-row-labels\">Size: <span class=\"room-row-content\">" + rSize + "</span> </span><span class=\"col-xs-2 room-row-labels\">Building: <span class=\"room-row-content\">" + rBuilding + "</span> </span><button class=\"btn btn-default pull-right\" data-target=\"#myModal\" data-toggle=\"modal\">Reserve</button></div>";
+
+  list.append(rowHtml);
+  
+}
+
 function getToday() {
   var today = new Date();
   var dd = today.getDate();
