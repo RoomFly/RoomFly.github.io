@@ -2,7 +2,7 @@ $("#dp3").datepicker({ minDate: 0});
 $("#dp3").val(getToday());
 $("#submit").click(function(){
     var filterVars = getFilterVals();
-    runQueries(filterVars);
+    var rooms = runQueries(filterVars);
   });
 
 function getToday() {
@@ -56,8 +56,7 @@ function convertTime(hour, minute, ampm) {
 function runQueries(filterVars){
   var results = timeQuery(filterVars.date,filterVars.startTime,filterVars.endTime);
   var convertedSize = convertSize(filterVars.room_size);
-  console.log(results);
-  querySize(convertedSize,results);
+  return querySize(convertedSize,results);
 }
 
 function buildRoomRow(room) {
