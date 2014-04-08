@@ -39,16 +39,15 @@
       </div>
       <div id="collapseOne" class="panel-collapse collapse in">
         <div class="panel-body">
-          <div class="form-group">
+          
+          <!-- Size Filter -->
+          <label class="control-label">Size: </label>
+          <select class="form-control" id="size">
+            <option>Small</option>
+            <option>Medium</option>
+            <option>Large</option>
+          </select>
 
-            <!-- Size Filter -->
-            <label class="control-label">Size: </label>
-            <select class="form-control" id="size">
-              <option>Small</option>
-              <option>Medium</option>
-              <option>Large</option>
-            </select>
-          </div>
 
           <!-- Date Filter -->
           <label class="control-label">Date: </label>
@@ -57,9 +56,7 @@
           </div>
           
           <!-- Time Filter -->
-          <div>
-            <label class="control-label">Time: </label>
-          </div>
+          <label class="control-label">Time: </label>
           <div>
             <label class="control-label">To: </label>
           </div>
@@ -91,6 +88,7 @@
               <option>PM</option>
             </select>
           </div>
+          
           <div>
             <label class="control-label">From: </label>
           </div>
@@ -124,9 +122,7 @@
           </div>
           
           <!-- Submit -->
-          <div>
-            <button class="btn btn-default" id="submit">Submit</button>
-          </div>
+          <button class="btn btn-default" id="submit">Submit</button>
         </div>
       </div>
     </div>
