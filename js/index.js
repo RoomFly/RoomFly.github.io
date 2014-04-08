@@ -1,9 +1,11 @@
 $("#dp3").datepicker({ minDate: 0});
 $("#dp3").val(getToday());
 $("#submit").click(function(){
-    var filterVars = getFilterVals();
-    var rooms = runQueries(filterVars);
-  });
+  //$("#room-list").html('<a href="#" class="list-group-item active">Available Rooms</a>');
+  var filterVars = getFilterVals();
+  var rooms = runQueries(filterVars);
+
+});
 
 function getToday() {
   var today = new Date();
@@ -60,33 +62,18 @@ function runQueries(filterVars){
 }
 
 function buildRoomRow(room) {
-  var name = room.room_name,
-  size = room.size,
+  var name = room.name,
+  size = room.room_size,
   maxCapacity = room.capacity,
   spaceID = room.space_id,
-  location = room.room_location;
+  location = room.location;
   $("#room-list").append('<div class="list-group-item room-row">' +
-      '<span class="col-xs-2 room-row-labels">Name: <span class="room-row-content">' + name + '</span> </span>' + 
-      '<span class="col-xs-2 room-row-labels">Size: <span class="room-row-content">' + maxCapacity + '</span> </span>' + 
-      '<span class="col-xs-2 room-row-labels">Building: <span class="room-row-content">' + location + '</span> </span>' +
-      '<button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>' +
+    '<span class="col-xs-2 room-row-labels">Name: <span class="room-row-content">' + name + '</span> </span>' + 
+    '<span class="col-xs-2 room-row-labels">Size: <span class="room-row-content">' + maxCapacity + '</span> </span>' + 
+    '<span class="col-xs-2 room-row-labels">Building: <span class="room-row-content">' + location + '</span> </span>' +
+    '<button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>' +
     '</div>');
 }
-
-
-var Rooms = Parse.Object.extend("Rooms");
-var query = new Parse.Query(Rooms);
-query.equalTo("room_name", "TCHAUD");
-query.find({
-  success:function(results){
-    buildRoomRow(results[0]);
-    console.log(results);
-  },
-  error:function(error){
-    alert("Error"+ error.message);
-  }
-});
-
 
 
 

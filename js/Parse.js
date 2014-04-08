@@ -14,12 +14,13 @@ function querySize(size,queryResult){
   var query = new Parse.Query(Rooms);
   query.equalTo("size", size);
   //query.containedIn("objectId",queryResult);
-  availableRooms = [];
+  var availableRooms = [];
   query.find({
     success:function(results){
       //console.log("SOMETHING WAS RETURNED");
+      //$("#room-list").html('<a href="#" class="list-group-item active">Available Rooms</a>');
       for(var i = 0; i<results.length;i++){
-        
+
         var x = queryResult.indexOf(results[i].id);
         if(x>=0){
           var roomObj = {
@@ -32,6 +33,14 @@ function querySize(size,queryResult){
           availableRooms.push(roomObj);
         }
       }
+      if (availableRooms.length){
+        for(var i = 0; i < availableRooms.length; i++) {
+          buildRoomRow(availableRooms[i]);
+        }
+      }
+      else{
+        alert('Sorry! No Rooms available');
+      }
     },
     error:function(error){
       alert("Error"+ error.message);
@@ -42,7 +51,7 @@ function querySize(size,queryResult){
 }
 
 
-   
+
 
 
 /*function test(){
@@ -110,7 +119,7 @@ function timeQuery (date,start_time,end_time){
       //alert(results.length);
       if (results.length == 0){
         alert("No room available during this time!");
-        return "NOT_FOUND";//the return value can be determined later
+        return;//the return value can be determined later
       }
       
       for(var i=0;i<results.length;i++){
