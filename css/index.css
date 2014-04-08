@@ -1,3 +1,11 @@
 .room-row {
 	height: 50px;
 }
+
+.room-row-labels {
+	font-weight: bold;
+}
+
+.room-row-content {
+	font-weight: normal;
+}
