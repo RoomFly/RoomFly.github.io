@@ -28,7 +28,7 @@ function getFilterVals() {
   startTime = convertTime($("#start-hour").val(), $("#start-minute").val(), $("#start-ampm").val()),
   endTime = convertTime($("#end-hour").val(), $("#end-minute").val(), $("#end-ampm").val());
   return {
-    size: size,
+    room_size: size,
     date: date,
     startTime: startTime,
     endTime: endTime
@@ -54,7 +54,7 @@ function convertTime(hour, minute, ampm) {
 }
 
 function runQueries(filterVars){
-  results = timeQuery(filterVars.date,filterVars.startTime,filterVars.endTime);
+  var results = timeQuery(filterVars.date,filterVars.startTime,filterVars.endTime);
   var convertedSize = convertSize(filterVars.room_size);
   console.log(results);
   querySize(convertedSize,results);
