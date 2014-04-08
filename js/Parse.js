@@ -86,6 +86,9 @@ function queryDB(date,times,size){
             }
           }
         }
+        else{
+          alert("no rooms available sorry!");
+        }
       });
     });
   return null;
