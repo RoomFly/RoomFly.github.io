@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="css/index.css"/>
 
   <!-- JavaScript -->
- 
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
   <!-- // <script type="text/javascript" src="js/jquery-1.11.0.js"></script> -->
@@ -40,7 +40,7 @@
       </div>
       <div id="collapseOne" class="panel-collapse collapse in">
         <div class="panel-body">
-          
+
           <!-- Size Filter -->
           <label class="control-label">Size: </label>
           <select class="form-control" id="size">
@@ -129,31 +129,32 @@
     </div>
   </div>
 
+  <!-- Reserve Room Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Reserve Room</h4>
+        </div>
+        <div class="modal-body">
+          <a href="https://25live.collegenet.com/northwestern/">Click here</a> to go to 25 Live and reserve the room.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Available Room List -->
   <div class="list-group" id="room-list">
     <a href="#" class="list-group-item active">
       Available Rooms
     </a>
-    
-    <!-- Reserve Room Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="myModalLabel">Reserve Room</h4>
-          </div>
-          <div class="modal-body">
-            <a href="https://25live.collegenet.com/northwestern/">Click here</a> to go to 25 Live and reserve the room.
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
+  </div>
 
   <script src = 'js/Parse.js'></script>
   <script src ='js/index.js'></script>
-  </body>
+</body>
 </html>
