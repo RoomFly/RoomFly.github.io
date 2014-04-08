@@ -9,14 +9,21 @@ function convertSize(size){
 
 
 function querySize(size,queryResult){
+  console.log(queryResult);
   var Rooms = Parse.Object.extend("Rooms");
   var query = new Parse.Query(Rooms);
   query.equalTo("size", size);
-  query.containedIn("objectId",queryResult);
+  //query.containedIn("objectId",queryResult);
+  availableRooms = [];
   query.find({
     success:function(results){
-      for (var i = 0; i < results.length; i++){
-        console.log(results[i]);
+      //console.log("SOMETHING WAS RETURNED");
+      for(var i = 0; i<results.length;i++){
+        
+        var x = queryResult.indexOf(results[i].id);
+        if(x>=0){
+          availableRooms.push(results[i]);
+        }
       }
     },
     error:function(error){
@@ -24,6 +31,7 @@ function querySize(size,queryResult){
     }
 
   });
+  return availableRooms;
 }
 
 
