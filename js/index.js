@@ -80,7 +80,7 @@ function buildRoomRow(room) {
   maxCapacity = room.capacity,
   spaceID = room.space_id,
   location = room.location;
-  $("#room-list").append('<div class="list-group-item room-row">' +
+  $("#room-list").append('<div class="list-group-item room-row container-fluid">' +
     '<span class="col-sm-2 room-row-labels">Name: <span class="room-row-content">' + name + '</span> </span>' + 
     '<span class="col-sm-2 room-row-labels">Size: <span class="room-row-content">' + maxCapacity + '</span> </span>' + 
     '<span class="col-sm-2 room-row-labels">Building: <span class="room-row-content">' + location + '</span> </span>' +
