@@ -1,9 +1,9 @@
 $("#dp3").datepicker({ minDate: 0});
 $("#dp3").val(getToday());
 $("#submit").click(function(){
-  //$("#room-list").html('<a href="#" class="list-group-item active">Available Rooms</a>');
+  $("#room-list").html('<a href="#" class="list-group-item active">Available Rooms</a>');
   var filterVars = getFilterVals();
-  var rooms = runQueries(filterVars);
+  runQueries(filterVars);
 
 });
 
@@ -48,7 +48,6 @@ function getFilterVals() {
     startTime: startTime,
     endTime: endTime
   };
-  // return size;
 }
 
 function convertTime(hour, minute, ampm) {
@@ -69,9 +68,17 @@ function convertTime(hour, minute, ampm) {
 }
 
 function runQueries(filterVars){
-  var results = timeQuery(filterVars.date,filterVars.startTime,filterVars.endTime);
-  var convertedSize = convertSize(filterVars.room_size);
-  return querySize(convertedSize,results);
+  var times = formatTime(filterVars.startTime,filterVars.endTime),
+  roomSize = formatSize(filterVars.room_size);
+  if(times.errorValue){
+    alert(times.errorValue)
+  }
+  else{
+    var val = queryDB(filterVars.date,times.query_time,roomSize);
+    if(val){
+      alert(val);
+    }
+  }
 }
 
 function buildRoomRow(room) {
