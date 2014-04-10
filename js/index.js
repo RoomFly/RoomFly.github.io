@@ -10,6 +10,22 @@ $("#start-ampm").val(time.ampm);
 $("#end-hour").val(timeToString(endtime.hour));
 $("#end-minute").val(time.minute);
 $("#end-ampm").val(endtime.ampm);
+
+$(".timepicker").change(function(){
+  var startHour = $("#start-hour").val();
+  var startMinute = $("#start-minute").val();
+  var startAmpm = $("#start-ampm").val();
+  var time = {hour:startHour,
+              ampm:startAmpm};
+
+  var endTime = getEndTime(time);
+
+  $("#end-hour").val(timeToString(endTime.hour));
+  $("#end-ampm").val(endTime.ampm);
+  $("#end-minute").val(startMinute);
+
+});
+
 $("#submit").click(function(){
   $("#room-list").html('<a href="#" class="list-group-item active">Available Rooms</a>');
   var filterVars = getFilterVals();
