@@ -1,19 +1,19 @@
 $("#dp3").datepicker({ minDate: 0});
 $("#dp3").val(getToday());
 var time = getCurrentTime();
-$("start-hour").val(time.hour);
-$("start-minute").val(time.minute);
-$("start-ampm").val(time.ampm);
+$("#start-hour").val(time.hour);
+$("#start-minute").val(time.minute);
+$("#start-ampm").val(time.ampm);
 $("#submit").click(function(){
   $("#room-list").html('<a href="#" class="list-group-item active">Available Rooms</a>');
   var filterVars = getFilterVals();
   runQueries(filterVars);
 });
 
-function getCurretTime(){
+function getCurrentTime(){
   var time = new Date();
-  var hour = time.getHour();
-  var minute = time.getMinute();
+  var hour = time.getHours();
+  var minute = time.getMinutes();
   var ampm;
   if(minute <= 30){
     minute = "30";
@@ -31,7 +31,7 @@ function getCurretTime(){
     hour = "0" + hour;
   }
 
-  return{
+  return {
     hour:hour,
     minute:minute,
     ampm:ampm
