@@ -42,7 +42,12 @@
         <div class="panel-body">
 
           <!-- Size Filter -->
-          <label class="control-label">Size: </label>
+          <label class="control-label">Room Size: </label>
+          <div>
+            <p>Small = Up to 50 </p>
+            <p>Medium = 50 - 100 </p>
+            <p>Large = Larger than 100 </p>
+          </div>
           <select class="form-control" id="size">
             <option>Small</option>
             <option>Medium</option>
@@ -62,7 +67,7 @@
             <label class="control-label">Start Time: </label>
           </div>
           <div class="col-xs-4">
-            <select class="col-xs-6 form-control" id="start-hour">
+            <select class="col-xs-6 form-control timepicker" id="start-hour">
               <option>01</option>
               <option>02</option>
               <option>03</option>
@@ -78,13 +83,13 @@
             </select>
           </div>
           <div class="col-xs-4">
-            <select class="form-control" id="start-minute">
+            <select class="form-control timepicker" id="start-minute">
               <option>00</option>
               <option>30</option>
             </select>
           </div>
           <div class="col-xs-4">
-            <select class="form-control" id="start-ampm">
+            <select class="form-control timepicker" id="start-ampm">
               <option>AM</option>
               <option>PM</option>
             </select>
@@ -123,7 +128,7 @@
           </div>
           
           <!-- Submit -->
-          <button class="btn btn-default" id="submit">Submit</button>
+          <button class="btn btn-primary" id="submit">Submit</button>
         </div>
       </div>
     </div>
