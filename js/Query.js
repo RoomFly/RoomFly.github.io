@@ -1,5 +1,5 @@
 Parse.initialize("VjKRngtz1yFy9XrA2YCjmnTr1Jn7XDHFBfT14zsF", "D0sZJ3i9C5NeXOIErxBzZq9qIx65FrTNgZLBZlvk");
-
+//$json = str_replace('\u0000', "", json_encode( $response ));
 //format size for db query
 function formatSize(size){
   word = size.slice(0,1);
@@ -67,6 +67,7 @@ function queryDB(date,times,size){
     timeQuery.equalTo(times[i],true);
   }
   timeQuery.find().then(function(timeSlots){ //get the room information from timeslots
+    console.log(timeSlots);
     if(timeSlots.length){
       for(var t = 0;t<timeSlots.length;t++)
         roomIds.push(timeSlots[t].get("room_id").id);
@@ -74,6 +75,7 @@ function queryDB(date,times,size){
   }).then(function(){ //size query
     roomQuery.equalTo("room_size",size);
     roomQuery.containedIn("objectId",roomIds);
+    //console.log(roomQuery.find());
     return roomQuery.find();
   }).then(function(rooms){
     if(!rooms.length){
@@ -87,23 +89,43 @@ function queryDB(date,times,size){
 	  	else if(size == 2) {
 			size2 = 3;
 	  	}
+      var aroom = [];
 	  	var newQuery = new Parse.Query(Rooms);
 	  	newQuery.greaterThanOrEqualTo ("room_size",size2);
 	  	newQuery.containedIn("objectId",roomIds);
-		newQuery.ascending('capacity');
-	  	rooms =  newQuery.find();
+		  newQuery.ascending('capacity');
+	  	rooms = newQuery.find();
+
 	  }
     }
+    console.log(rooms);
     return {error:errorValue, available:rooms};
   }).then(function(val){//Display the information for the user
-    if(val.error){
+    //console.log(val);
+    //console.log(val["available"]);
+  
+    //console.log(val.available.get("available"));
+
+    
+       if(val.error){
       alert(val.error);
     }
-    else{
-      for(var r = 0;r<val.available.length;r++){
-        buildRoomRow(val.available[r]);
+      else{
+        var ava = val.available;
+        return ava;
       }
-    }
+      }).then(function(roomava){
+         for(var r = 0;r < roomava.length; r++){
+        buildRoomRow(roomava[r]);
+      }
+      
+
+      
+        
+       
+
+    
+   
   });
 }
 
