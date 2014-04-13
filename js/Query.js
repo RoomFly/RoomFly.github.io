@@ -85,9 +85,11 @@ function queryDB(date,times,size){
 	  else {
 	  	if (size == 1){
 	  		size2 = 2;
+        alert("There is no rooms available at the specified size, but we will search other size of rooms to let you choose")
 	  	}
 	  	else if(size == 2) {
 			size2 = 3;
+      alert("There is no rooms available at the specified size, but we will search other size of rooms to let you choose")
 	  	}
       var aroom = [];
 	  	var newQuery = new Parse.Query(Rooms);
