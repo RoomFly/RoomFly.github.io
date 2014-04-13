@@ -97,7 +97,6 @@ function queryDB(date, times, size) {
         newQuery.containedIn("objectId", roomIds);
         newQuery.ascending('capacity');
         rooms = newQuery.find();
-
       }
     }
     console.log(rooms);
@@ -106,12 +105,6 @@ function queryDB(date, times, size) {
       available: rooms
     };
   }).then(function(val) { //Display the information for the user
-    //console.log(val);
-    //console.log(val["available"]);
-
-    //console.log(val.available.get("available"));
-
-
     if (val.error) {
       alert(val.error);
     } else {
@@ -119,6 +112,9 @@ function queryDB(date, times, size) {
       return ava;
     }
   }).then(function(roomava) {
+    if (roomava.length > 0) {
+      $('#filter-collapse').collapse('hide');
+    }
     for (var r = 0; r < roomava.length; r++) {
       buildRoomRow(roomava[r]);
     }
@@ -126,7 +122,6 @@ function queryDB(date, times, size) {
 }
 
 function buildRoomRow(room) {
-  alert("scroll down and see all the available rooms");
   var name = room.get("room_name"),
     size = room.get("size"),
     maxCapacity = room.get("capacity"),
