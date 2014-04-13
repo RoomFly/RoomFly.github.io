@@ -1,4 +1,6 @@
-$("#dp3").datepicker({ minDate: 0});
+$("#dp3").datepicker({
+  minDate: 0
+});
 $("#dp3").val(getToday());
 
 var time = getCurrentTime();
@@ -11,12 +13,14 @@ $("#end-hour").val(timeToString(endtime.hour));
 $("#end-minute").val(time.minute);
 $("#end-ampm").val(endtime.ampm);
 
-$(".timepicker").change(function(){
+$(".timepicker").change(function() {
   var startHour = $("#start-hour").val();
   var startMinute = $("#start-minute").val();
   var startAmpm = $("#start-ampm").val();
-  var time = {hour:startHour,
-              ampm:startAmpm};
+  var time = {
+    hour: startHour,
+    ampm: startAmpm
+  };
 
   var endTime = getEndTime(time);
 
@@ -26,21 +30,20 @@ $(".timepicker").change(function(){
 
 });
 
-$("#submit").click(function(){
+$("#submit").click(function() {
   $("#room-list").html('<a href="#" class="list-group-item active">Available Rooms</a>');
   var filterVars = getFilterVals();
   runQueries(filterVars);
 });
 
-function getCurrentTime(){
+function getCurrentTime() {
   var time = new Date();
   var hour = time.getHours();
   var minute = time.getMinutes();
   var ampm;
-  if(minute <= 30){
+  if (minute <= 30) {
     minute = "30";
-  }
-  else if(minute > 30){
+  } else if (minute > 30) {
     minute = "00";
     hour = hour + 1;
   }
@@ -54,53 +57,51 @@ function getCurrentTime(){
   // }
 
   return {
-    hour:hour,
-    minute:minute,
-    ampm:ampm
+    hour: hour,
+    minute: minute,
+    ampm: ampm
   };
 }
 
-function convert24To12(hour){
+function convert24To12(hour) {
   var ampm = "AM";
-  if(hour >= 12){
+  if (hour >= 12) {
     hour = hour - 12;
     ampm = "PM";
   }
-  if(hour == 0){
+  if (hour == 0) {
     hour = 12;
   }
   return {
-    hour:hour,
-    ampm:ampm
+    hour: hour,
+    ampm: ampm
   };
 }
 
-function timeToString(hour){
+function timeToString(hour) {
   hour = hour.toString();
-  if(hour.length == 1){
+  if (hour.length == 1) {
     hour = "0" + hour;
   }
   return hour;
 }
 
-function getEndTime(time){
+function getEndTime(time) {
   var hour = time.hour;
   var ampm = time.ampm;
-  if(hour == 12){
-    if(ampm == "AM"){
+  if (hour == 12) {
+    if (ampm == "AM") {
       ampm = "PM";
-    }
-    else{
+    } else {
       ampm = "AM";
     }
     hour = 1;
-  }
-  else{
+  } else {
     hour++;
   }
-  return{
-    hour:hour,
-    ampm:ampm
+  return {
+    hour: hour,
+    ampm: ampm
   };
 }
 
@@ -139,52 +140,24 @@ function convertTime(hour, minute, ampm) {
   var hours = Number(time.match(/^(\d+)/)[1]);
   var minutes = Number(time.match(/:(\d+)/)[1]);
   var AMPM = time.match(/\s(.*)$/)[1];
-  if(AMPM == "PM" && hours<12) hours = hours+12;
-  if(AMPM == "AM" && hours==12) hours = hours-12;
+  if (AMPM == "PM" && hours < 12) hours = hours + 12;
+  if (AMPM == "AM" && hours == 12) hours = hours - 12;
   var sHours = hours.toString();
   var sMinutes = minutes.toString();
-  if(hours<10) sHours = "0" + sHours;
-  if(minutes<10) sMinutes = "0" + sMinutes; 
+  if (hours < 10) sHours = "0" + sHours;
+  if (minutes < 10) sMinutes = "0" + sMinutes;
   return {
     hour: sHours,
     minute: sMinutes
   };
 }
 
-function runQueries(filterVars){
-  var times = formatTime(filterVars.startTime,filterVars.endTime),
-  roomSize = formatSize(filterVars.room_size);
-  if(times.errorValue){
+function runQueries(filterVars) {
+  var times = formatTime(filterVars.startTime, filterVars.endTime),
+    roomSize = formatSize(filterVars.room_size);
+  if (times.errorValue) {
     alert(times.errorValue)
-  }
-  else{
-    queryDB(filterVars.date,times.query_time,roomSize);
+  } else {
+    queryDB(filterVars.date, times.query_time, roomSize);
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
