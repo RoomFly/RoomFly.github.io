@@ -130,6 +130,7 @@ function queryDB(date,times,size){
 }
 
 function buildRoomRow(room) {
+  alert("scroll down and see all the available rooms");
   var name = room.get("room_name"),
   size = room.get("size"),
   maxCapacity = room.get("capacity"),
