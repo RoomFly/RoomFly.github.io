@@ -79,7 +79,6 @@ function queryDB(date,times,size){
     return roomQuery.find();
   }).then(function(rooms){
     if(!rooms.length){
-<<<<<<< HEAD
 	  if (size == 3){
 	  	errorValue = "Sorry! No rooms are available at the specified time, date, and size you requested";
 	  }
@@ -125,32 +124,6 @@ function queryDB(date,times,size){
         
        
 
-    
-   
-=======
-     if (size == 3){
-      errorValue = "Sorry! No rooms are available at the specified time, date, and size you requested";
-    }
-    else {
-      if (size == 1){
-       size2 = 2;
-     }
-     else if(size == 2) {
-       size2 = 3;
-     }
-     var newQuery = new Parse.Query(Rooms);
-     newQuery.greaterThanOrEqualTo ("room_size",size2);
-     newQuery.containedIn("objectId",roomIds);
-     newQuery.ascending('capacity');
-     return newQuery.find();
-   }
- }
- return {error:errorValue, available:rooms};
-  }).then(function(val){//Display the information for the user
-    for(var r = 0;r<val.length;r++){
-      buildRoomRow(val[r]);
-    }
->>>>>>> b62b58e61d1b55ed12a9e5a2d1668c114825791a
   });
 }
 
