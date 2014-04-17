@@ -123,15 +123,26 @@ function getToday() {
 }
 
 function getFilterVals() {
-  var size = $("#size").val();
+  var size = $("#size").val(),
   date = $("#dp3").datepicker('getDate'),
   startTime = convertTime($("#start-hour").val(), $("#start-minute").val(), $("#start-ampm").val()),
-  endTime = convertTime($("#end-hour").val(), $("#end-minute").val(), $("#end-ampm").val());
+  endTime = convertTime($("#end-hour").val(), $("#end-minute").val(), $("#end-ampm").val()),
+  campus_location = $("#campus_location").val(),
+  equipment = [];
+
+  $("input[type=checkbox]").each(function(){
+    if($(this).checked){
+      equipment.push($(this).val());
+    }
+  });
+
   return {
     room_size: size,
     date: date,
     startTime: startTime,
-    endTime: endTime
+    endTime: endTime,
+    campus_location:campus_location,
+    equipment: equipment
   };
 }
 
@@ -154,10 +165,12 @@ function convertTime(hour, minute, ampm) {
 
 function runQueries(filterVars) {
   var times = formatTime(filterVars.startTime, filterVars.endTime),
-    roomSize = formatSize(filterVars.room_size);
+    roomSize = formatSize(filterVars.room_size),
+    equipment = formatEquipment(filterVars.equipment),
+    campus_location= formatCampusLocation(filterVars.campus_location);
   if (times.errorValue) {
     alert(times.errorValue)
   } else {
-    queryDB(filterVars.date, times.query_time, roomSize);
+    queryDB(filterVars.date,times.query_time,roomSize,equipment,campus_location);
   }
 }
