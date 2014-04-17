@@ -1,15 +1,36 @@
 Parse.initialize("VjKRngtz1yFy9XrA2YCjmnTr1Jn7XDHFBfT14zsF", "D0sZJ3i9C5NeXOIErxBzZq9qIx65FrTNgZLBZlvk");
 //$json = str_replace('\u0000', "", json_encode( $response ));
 //format size for db query
+
+function formatCampusLocation(campus){
+  if(campus=="No Preference"){
+    return null;
+  }
+  else
+    return campus;
+}
+function formatEquipment(equipment){
+  if(!equipment.length){
+    return null;
+  }
+  else
+    return equipment;
+}
 function formatSize(size) {
-  word = size.slice(0, 1);
   var num;
-  if (word == "S") {
-    num = 1;
-  } else if (word == "M") {
-    num = 2;
-  } else if (word == "L") {
-    num = 3;
+  if(size=="No Preference"){
+    num = null;
+  }
+  else{
+    word = size.slice(0, 1);
+    var num;
+    if (word == "S") {
+      num = 1;
+    } else if (word == "M") {
+      num = 2;
+    } else if (word == "L") {
+      num = 3;
+    }
   }
   //word = word.toUpperCase();
   return num;
@@ -77,7 +98,6 @@ function queryDB(date, times, size) {
   }).then(function() { //size query
     roomQuery.equalTo("room_size", size);
     roomQuery.containedIn("objectId", roomIds);
-    //console.log(roomQuery.find());
     return roomQuery.find();
   }).then(function(rooms) {
     if (!rooms.length) {
