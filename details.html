@@ -1,0 +1,562 @@
+<!Doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>RoomFly</title>
+  <meta name="description" content="RoomFly">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/datepicker.css">
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css"/>
+  <link rel="stylesheet" href="css/index.css"/>
+  <link rel="stylesheet" href="css/details.css"/>
+
+  <!-- JavaScript -->
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+  <!-- // <script type="text/javascript" src="js/jquery-1.11.0.js"></script> -->
+  <!--Always include this in html file-->
+  <script src = 'js/bootstrap.js'></script>
+  <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+  <!-- // <script type="text/javascript" src="js/bootstrap-datepicker.js"></script> -->
+</head>
+
+<body>
+
+  <div id="main">
+    <h2>RoomFly!</h2>
+  </div>
+
+  <div class="list-group" id="room-list">
+    <a href="#" class="list-group-item active">
+      Room Details
+    </a>
+    <div class="list-group-item room-row container-fluid">
+      <span class="col-sm-2 room-row-labels">Name: <span class="room-row-content">LR3</span> </span>
+      <span class="col-sm-2 room-row-labels">Size: <span class="room-row-content">86</span> </span> 
+      <span class="col-sm-2 room-row-labels">Building: <span class="room-row-content">Tech</span> </span>
+      <button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>
+    </div>
+  </div>
+
+  <!-- Timeline View -->
+  <div class="panel panel-default">
+  <div class="panel-heading">Room Availbility</div>
+
+  <!-- Table -->
+  <table class="table">
+    <tr>
+      <th>Time</th>
+      <th>Day 1</th>
+      <th>Day 2</th>
+      <th>Day 3</th>
+      <th>Day 4</th>
+      <th>Day 5</th>
+      <th>Day 6</th>
+      <th>Day 7</th>
+    </tr>
+    <tr>
+      <th>8AM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>9AM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>10AM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half colored"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>11AM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half colored"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>12PM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>1PM</th>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>2PM</th>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>3PM</th>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>4PM</th>
+      <td>
+        <div class="half colored"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>5PM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>6PM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>7PM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>8PM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td class="colored">
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>9PM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>10PM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+    <tr>
+      <th>11PM</th>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+      <td>
+        <div class="half"></div>
+        <div class="half"></div>
+      </td>
+    </tr>
+  </table>
+
+
+  <script src = 'js/Query.js'></script>
+  <script src ='js/index.js'></script>
+</body>
+</html>
