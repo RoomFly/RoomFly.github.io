@@ -131,7 +131,7 @@ function getFilterVals() {
   equipment = [];
 
   $("input[type=checkbox]").each(function(){
-    if($(this).checked){
+    if($(this).prop('checked')){
       equipment.push($(this).val());
     }
   });
