@@ -74,7 +74,7 @@ function queryDB(date, times, size, equipment, campus_loc) {
   var Time_Table = Parse.Object.extend("Time_Table"),
     size2,
     Rooms = Parse.Object.extend("Rooms"),
-    //roomQuery = new Parse.Query(Rooms),
+    roomQuery = new Parse.Query(Rooms),
     sizeQuery = new Parse.Query(Rooms),
     locQuery = new Parse.Query(Rooms),
     equipQuery = new Parse.Query(Rooms),
@@ -97,24 +97,39 @@ function queryDB(date, times, size, equipment, campus_loc) {
         roomIds.push(timeSlots[t].get("room_id").id);
     }
   }).then(function() { //size,location, equipment
-    sizeQuery.containedIn("objectId", roomIds); //base set with roomIds with correct date and time
-    sizeQuery.equalTo("size",size);
-
-    locQuery.containedIn("objectId", roomIds);
-    locQuery.equalTo("campus_location",campus_loc);
-
+    roomQuery.containedIn("objectId",roomIds);
+    if(size){
+      roomQuery.equalTo("room_size",size);
+    }
+    if(campus_loc){
+      roomQuery.equalTo("campus_location",campus_loc);
+    }
     if(equipment){
-      equipQuery.containedIn("objectId", roomIds);
+      for(var e =0;e<equipment.length;e++){
+        roomQuery.equalTo(equipment[e],true);
+      }
+    }
+    return roomQuery.find();
+    /*sizeQuery = roomQuery;
+    sizeQuery.equalTo("room_size",size);
+   //base set with roomIds with correct date and time
+    
+    locQuery = roomQuery;
+    locQuery.containedIn("objectId", roomIds);
+    
+    if(equipment){
+      
       for(var e = 0;e<equipment.length;e++){
         equipQuery.equalTo(equipment[e],true);
       } 
+      
     }
     sizeQuery.find().then(function(sizes){
-      console.log(sizes.length);
-    });
-  });/*.then(function(rooms) {
+
+    });*/
+  }).then(function(rooms) {
     if (!rooms.length) {
-      if (size == 3) {
+   /*   if (size == 3) {
         errorValue = "Sorry! No rooms are available at the specified time, date, and size you requested";
       } else {
         if (size == 1) {
@@ -130,9 +145,9 @@ function queryDB(date, times, size, equipment, campus_loc) {
         newQuery.containedIn("objectId", roomIds);
         newQuery.ascending('capacity');
         rooms = newQuery.find();
-      }
+      }*/
+      errorValue = 'Sorry there are no rooms with these specific spec';
     }
-    console.log(rooms);
     return {
       error: errorValue,
       available: rooms
@@ -151,12 +166,12 @@ function queryDB(date, times, size, equipment, campus_loc) {
     for (var r = 0; r < roomava.length; r++) {
       buildRoomRow(roomava[r]);
     }
-  });*/
+  });
 }
 
 function buildRoomRow(room) {
   var name = room.get("room_name"),
-    size = room.get("size"),
+    size = room.get("room_size"),
     maxCapacity = room.get("capacity"),
     spaceID = room.get("space_id"),
     location = room.get("room_location");
