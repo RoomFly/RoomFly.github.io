@@ -70,12 +70,14 @@ function formatTime(start_time, end_time) {
 }
 
 //query for time and date then query for room_size
-function queryDB(date, times, size) {
+function queryDB(date, times, size, equipment, campus_loc) {
   var Time_Table = Parse.Object.extend("Time_Table"),
-
     size2,
     Rooms = Parse.Object.extend("Rooms"),
-    roomQuery = new Parse.Query(Rooms),
+    //roomQuery = new Parse.Query(Rooms),
+    sizeQuery = new Parse.Query(Rooms),
+    locQuery = new Parse.Query(Rooms),
+    equipQuery = new Parse.Query(Rooms),
     timeQuery = new Parse.Query(Time_Table),
     availableRooms = [],
     roomIds = [],
@@ -90,16 +92,27 @@ function queryDB(date, times, size) {
     timeQuery.equalTo(times[i], true);
   }
   timeQuery.find().then(function(timeSlots) { //get the room information from timeslots
-    console.log(timeSlots);
     if (timeSlots.length) {
       for (var t = 0; t < timeSlots.length; t++)
         roomIds.push(timeSlots[t].get("room_id").id);
     }
-  }).then(function() { //size query
-    roomQuery.equalTo("room_size", size);
-    roomQuery.containedIn("objectId", roomIds);
-    return roomQuery.find();
-  }).then(function(rooms) {
+  }).then(function() { //size,location, equipment
+    sizeQuery.containedIn("objectId", roomIds); //base set with roomIds with correct date and time
+    sizeQuery.equalTo("size",size);
+
+    locQuery.containedIn("objectId", roomIds);
+    locQuery.equalTo("campus_location",campus_loc);
+
+    if(equipment){
+      equipQuery.containedIn("objectId", roomIds);
+      for(var e = 0;e<equipment.length;e++){
+        equipQuery.equalTo(equipment[e],true);
+      } 
+    }
+    sizeQuery.find().then(function(sizes){
+      console.log(sizes.length);
+    });
+  });/*.then(function(rooms) {
     if (!rooms.length) {
       if (size == 3) {
         errorValue = "Sorry! No rooms are available at the specified time, date, and size you requested";
@@ -138,7 +151,7 @@ function queryDB(date, times, size) {
     for (var r = 0; r < roomava.length; r++) {
       buildRoomRow(roomava[r]);
     }
-  });
+  });*/
 }
 
 function buildRoomRow(room) {
