@@ -3,15 +3,39 @@ $("#dp3").datepicker({
 });
 $("#dp3").val(getToday());
 
-var time = getCurrentTime();
-var endtime = getEndTime(time);
+// var time = getCurrentTime();
+// var endtime = getEndTime(time);
 
-$("#start-hour").val(timeToString(time.hour));
-$("#start-minute").val(time.minute);
-$("#start-ampm").val(time.ampm);
-$("#end-hour").val(timeToString(endtime.hour));
-$("#end-minute").val(time.minute);
-$("#end-ampm").val(endtime.ampm);
+// $("#start-hour").val(timeToString(time.hour));
+// $("#start-minute").val(time.minute);
+// $("#start-ampm").val(time.ampm);
+// $("#end-hour").val(timeToString(endtime.hour));
+// $("#end-minute").val(time.minute);
+// $("#end-ampm").val(endtime.ampm);
+
+
+var endInput = $("#end-time-picker").pickatime({
+  min: [8, 30],
+  max: [22, 30],
+  clear: ''
+});
+
+var endPicker = endInput.pickatime('picker');
+
+var startInput = $("#start-time-picker").pickatime({
+  min: [8, 30],
+  max: [22, 30],
+  clear: '',
+  onSet: function() {
+    var start = startInput.pickatime('picker').get('select');
+    var endPicker = endInput.pickatime('picker');
+    endPicker.set('select', [start.hour + 1, start.mins]);
+  }
+});
+
+var startPicker = startInput.pickatime('picker');
+var now = startPicker.get('now');
+startPicker.set('select', [now.hour, now.mins]);
 
 $(".timepicker").change(function() {
   var startHour = $("#start-hour").val();
@@ -125,8 +149,10 @@ function getToday() {
 function getFilterVals() {
   var size = $("#size").val();
   date = $("#dp3").datepicker('getDate'),
-  startTime = convertTime($("#start-hour").val(), $("#start-minute").val(), $("#start-ampm").val()),
-  endTime = convertTime($("#end-hour").val(), $("#end-minute").val(), $("#end-ampm").val());
+  //startTime = convertTime($("#start-hour").val(), $("#start-minute").val(), $("#start-ampm").val()),
+  //endTime = convertTime($("#end-hour").val(), $("#end-minute").val(), $("#end-ampm").val());
+  startTime = convert12To24(startPicker.get('value'));
+  endTime = convert12To24(endPicker.get('value'));
   return {
     room_size: size,
     date: date,
@@ -135,8 +161,8 @@ function getFilterVals() {
   };
 }
 
-function convertTime(hour, minute, ampm) {
-  var time = hour + ":" + minute + " " + ampm;
+function convert12To24(time) {
+  //var time = hour + ":" + minute + " " + ampm;
   var hours = Number(time.match(/^(\d+)/)[1]);
   var minutes = Number(time.match(/:(\d+)/)[1]);
   var AMPM = time.match(/\s(.*)$/)[1];

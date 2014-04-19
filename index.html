@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="css/datepicker.css">
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/smoothness/jquery-ui.css"/>
   <link rel="stylesheet" href="css/index.css"/>
+  <link rel="stylesheet" href="css/default.css"/>
+  <link rel="stylesheet" href="css/default.time.css"/>
 
   <!-- JavaScript -->
 
@@ -19,6 +21,8 @@
   <!--Always include this in html file-->
   <script src = 'js/bootstrap.js'></script>
   <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.2.18.min.js"></script>
+  <script src = 'js/picker.js'></script>
+  <script src = 'js/picker.time.js'></script>
   <!-- // <script type="text/javascript" src="js/bootstrap-datepicker.js"></script> -->
 </head>
 
@@ -51,7 +55,8 @@
           <div>
             <label class="control-label">Start Time: </label>
           </div>
-          <div class="col-xs-4">
+          <input class="form-control timepicker" id="start-time-picker" placeholder="">
+          <!-- <div class="col-xs-4">
             <select class="col-xs-6 form-control timepicker" id="start-hour">
               <option>01</option>
               <option>02</option>
@@ -78,12 +83,13 @@
               <option>AM</option>
               <option>PM</option>
             </select>
-          </div>
+          </div> -->
           
           <div>
             <label class="control-label">End Time: </label>
           </div>
-          <div class="col-xs-4">
+          <input class="form-control timepicker" id="end-time-picker" placeholder="">
+          <!-- <div class="col-xs-4">
             <select class="col-xs-6 form-control" id="end-hour">
               <option>01</option>
               <option>02</option>
@@ -110,7 +116,7 @@
               <option>AM</option>
               <option>PM</option>
             </select>
-          </div>
+          </div> -->
           <!-- Size Filter -->
           <label class="control-label">Room Size: </label>
           <select class="form-control" id="size">
