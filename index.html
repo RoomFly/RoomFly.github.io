@@ -43,7 +43,7 @@
           <!-- Date Filter -->
           <label class="control-label">Date: </label>
           <div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-            <input readonly="true" class="form-control" id="dp3" type="text" value="12-02-2012">
+            <input readonly="true" class="form-control" id="dp3" type="text" value="12-02-2012" required>
           </div>
           
           <!-- Time Filter -->
@@ -52,7 +52,7 @@
             <label class="control-label">Start Time: </label>
           </div>
           <div class="col-xs-4">
-            <select class="col-xs-6 form-control timepicker" id="start-hour">
+            <select class="col-xs-6 form-control timepicker" id="start-hour" required>
               <option>01</option>
               <option>02</option>
               <option>03</option>
@@ -68,13 +68,13 @@
             </select>
           </div>
           <div class="col-xs-4">
-            <select class="form-control timepicker" id="start-minute">
+            <select class="form-control timepicker" id="start-minute" required>
               <option>00</option>
               <option>30</option>
             </select>
           </div>
           <div class="col-xs-4">
-            <select class="form-control timepicker" id="start-ampm">
+            <select class="form-control timepicker" id="start-ampm" required>
               <option>AM</option>
               <option>PM</option>
             </select>
@@ -84,7 +84,7 @@
             <label class="control-label">End Time: </label>
           </div>
           <div class="col-xs-4">
-            <select class="col-xs-6 form-control" id="end-hour">
+            <select class="col-xs-6 form-control" id="end-hour" required>
               <option>01</option>
               <option>02</option>
               <option>03</option>
@@ -112,16 +112,16 @@
             </select>
           </div>
           <!-- Size Filter -->
-          <label class="control-label">Room Size: </label>
+          <label class="control-label">Room Size (Optional): </label>
           <select class="form-control" id="size">
             <option>No Preference</option>
             <option>Small = Up to 50</option>
             <option>Medium = 50 - 100</option>
             <option>Large = Larger than 100</option>
           </select>
-          <label class='control-label'>Campus Location:</label>
+          <label class='control-label'>Campus Location (Optional):</label>
           <select class = 'form-control' id ='campus_location'>
-            <option>No Prefernce</option>
+            <option>No Preference</option>
             <option>North</option>
             <option>South</option>
           </select>
