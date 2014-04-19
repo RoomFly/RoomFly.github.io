@@ -1,15 +1,36 @@
 Parse.initialize("VjKRngtz1yFy9XrA2YCjmnTr1Jn7XDHFBfT14zsF", "D0sZJ3i9C5NeXOIErxBzZq9qIx65FrTNgZLBZlvk");
 //$json = str_replace('\u0000', "", json_encode( $response ));
 //format size for db query
+
+function formatCampusLocation(campus){
+  if(campus=="No Preference"){
+    return null;
+  }
+  else
+    return campus;
+}
+function formatEquipment(equipment){
+  if(!equipment.length){
+    return null;
+  }
+  else
+    return equipment;
+}
 function formatSize(size) {
-  word = size.slice(0, 1);
   var num;
-  if (word == "S") {
-    num = 1;
-  } else if (word == "M") {
-    num = 2;
-  } else if (word == "L") {
-    num = 3;
+  if(size=="No Preference"){
+    num = null;
+  }
+  else{
+    word = size.slice(0, 1);
+    var num;
+    if (word == "S") {
+      num = 1;
+    } else if (word == "M") {
+      num = 2;
+    } else if (word == "L") {
+      num = 3;
+    }
   }
   //word = word.toUpperCase();
   return num;
@@ -49,12 +70,14 @@ function formatTime(start_time, end_time) {
 }
 
 //query for time and date then query for room_size
-function queryDB(date, times, size) {
+function queryDB(date, times, size, equipment, campus_loc) {
   var Time_Table = Parse.Object.extend("Time_Table"),
-
     size2,
     Rooms = Parse.Object.extend("Rooms"),
     roomQuery = new Parse.Query(Rooms),
+    sizeQuery = new Parse.Query(Rooms),
+    locQuery = new Parse.Query(Rooms),
+    equipQuery = new Parse.Query(Rooms),
     timeQuery = new Parse.Query(Time_Table),
     availableRooms = [],
     roomIds = [],
@@ -69,19 +92,44 @@ function queryDB(date, times, size) {
     timeQuery.equalTo(times[i], true);
   }
   timeQuery.find().then(function(timeSlots) { //get the room information from timeslots
-    console.log(timeSlots);
     if (timeSlots.length) {
       for (var t = 0; t < timeSlots.length; t++)
         roomIds.push(timeSlots[t].get("room_id").id);
     }
-  }).then(function() { //size query
-    roomQuery.equalTo("room_size", size);
-    roomQuery.containedIn("objectId", roomIds);
-    //console.log(roomQuery.find());
+  }).then(function() { //size,location, equipment
+    roomQuery.containedIn("objectId",roomIds);
+    if(size){
+      roomQuery.equalTo("room_size",size);
+    }
+    if(campus_loc){
+      roomQuery.equalTo("campus_location",campus_loc);
+    }
+    if(equipment){
+      for(var e =0;e<equipment.length;e++){
+        roomQuery.equalTo(equipment[e],true);
+      }
+    }
     return roomQuery.find();
+    /*sizeQuery = roomQuery;
+    sizeQuery.equalTo("room_size",size);
+   //base set with roomIds with correct date and time
+    
+    locQuery = roomQuery;
+    locQuery.containedIn("objectId", roomIds);
+    
+    if(equipment){
+      
+      for(var e = 0;e<equipment.length;e++){
+        equipQuery.equalTo(equipment[e],true);
+      } 
+      
+    }
+    sizeQuery.find().then(function(sizes){
+
+    });*/
   }).then(function(rooms) {
     if (!rooms.length) {
-      if (size == 3) {
+   /*   if (size == 3) {
         errorValue = "Sorry! No rooms are available at the specified time, date, and size you requested";
       } else {
         if (size == 1) {
@@ -97,9 +145,9 @@ function queryDB(date, times, size) {
         newQuery.containedIn("objectId", roomIds);
         newQuery.ascending('capacity');
         rooms = newQuery.find();
-      }
+      }*/
+      errorValue = 'Sorry there are no rooms with these specific spec';
     }
-    console.log(rooms);
     return {
       error: errorValue,
       available: rooms
@@ -123,7 +171,7 @@ function queryDB(date, times, size) {
 
 function buildRoomRow(room) {
   var name = room.get("room_name"),
-    size = room.get("size"),
+    size = room.get("room_size"),
     maxCapacity = room.get("capacity"),
     spaceID = room.get("space_id"),
     location = room.get("room_location");

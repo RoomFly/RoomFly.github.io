@@ -47,7 +47,7 @@
           <!-- Date Filter -->
           <label class="control-label">Date: </label>
           <div class="input-append date" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-            <input readonly="true" class="form-control" id="dp3" type="text" value="12-02-2012">
+            <input readonly="true" class="form-control" id="dp3" type="text" value="12-02-2012" required>
           </div>
           
           <!-- Time Filter -->
@@ -118,13 +118,62 @@
             </select>
           </div> -->
           <!-- Size Filter -->
-          <label class="control-label">Room Size: </label>
+          <label class="control-label">Room Size (Optional): </label>
           <select class="form-control" id="size">
+            <option>No Preference</option>
             <option>Small = Up to 50</option>
             <option>Medium = 50 - 100</option>
             <option>Large = Larger than 100</option>
           </select>
-          
+          <label class='control-label'>Campus Location (Optional):</label>
+          <select class = 'form-control' id ='campus_location'>
+            <option>No Preference</option>
+            <option>North</option>
+            <option>South</option>
+          </select>
+
+          <!-- Facilities filters -->
+          <div class="checkbox-list">
+            <div>
+              <label class="control-label">Equipment(Optional): </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="equip_av" id="av"> Projector and Audio
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="equip_computer" id="computer"> Computer Equipment
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="equip_dvd" id="dvd"> DVD Player
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="equip_dc" id="dc"> Document Camera
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="equip_lc" id="lc"> Laptop Connection
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="equip_microphone" id="microphone"> Microphone Equipment
+              </label>
+            </div>
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="equip_wifi" id="wifi"> WiFi
+              </label>
+            </div>
+          </div>
+
           <!-- Submit -->
           <button class="btn btn-primary" id="submit">Submit</button>
         </div>
