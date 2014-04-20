@@ -26,17 +26,24 @@
 	font-weight: normal;
 }
 
-input[type=checkbox]
-{
- /* Double-sized Checkboxes */
- -ms-transform: scale(2); /* IE */
- -moz-transform: scale(2); /* FF */
- -webkit-transform: scale(2,2); /* Safari and Chrome */
- -o-transform: scale(2); /* Opera */
- padding: 10px;
-}
 
-.mycheckbox {
+/*input[type=checkbox]
+{
+ -ms-transform: scale(2); 
+ -moz-transform: scale(2); 
+ -webkit-transform: scale(2,2); 
+ -o-transform: scale(2); 
+ padding: 10px;
+}*/
+
+ /* Double-sized Checkboxes */
+ /* IE */
+ /* FF */
+/* Safari and Chrome */
+/* Opera */
+
+
+/*.mycheckbox {
 	padding: 3px;
 	margin-left: 30px;
 }
@@ -44,4 +51,4 @@ input[type=checkbox]
 .myequi {
 	padding-left: 10px;
 	font-size: 15px;
-}
+}*/
