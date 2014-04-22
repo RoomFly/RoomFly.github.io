@@ -2,26 +2,25 @@ Parse.initialize("VjKRngtz1yFy9XrA2YCjmnTr1Jn7XDHFBfT14zsF", "D0sZJ3i9C5NeXOIErx
 //$json = str_replace('\u0000', "", json_encode( $response ));
 //format size for db query
 
-function formatCampusLocation(campus){
-  if(campus=="No Preference"){
+function formatCampusLocation(campus) {
+  if (campus == "No Preference") {
     return null;
-  }
-  else
+  } else
     return campus;
 }
-function formatEquipment(equipment){
-  if(!equipment.length){
+
+function formatEquipment(equipment) {
+  if (!equipment.length) {
     return null;
-  }
-  else
+  } else
     return equipment;
 }
+
 function formatSize(size) {
   var num;
-  if(size=="No Preference"){
+  if (size == "No Preference") {
     num = null;
-  }
-  else{
+  } else {
     word = size.slice(0, 1);
     var num;
     if (word == "S") {
@@ -97,16 +96,16 @@ function queryDB(date, times, size, equipment, campus_loc) {
         roomIds.push(timeSlots[t].get("room_id").id);
     }
   }).then(function() { //size,location, equipment
-    roomQuery.containedIn("objectId",roomIds);
-    if(size){
-      roomQuery.equalTo("room_size",size);
+    roomQuery.containedIn("objectId", roomIds);
+    if (size) {
+      roomQuery.equalTo("room_size", size);
     }
-    if(campus_loc){
-      roomQuery.equalTo("campus_location",campus_loc);
+    if (campus_loc) {
+      roomQuery.equalTo("campus_location", campus_loc);
     }
-    if(equipment){
-      for(var e =0;e<equipment.length;e++){
-        roomQuery.equalTo(equipment[e],true);
+    if (equipment) {
+      for (var e = 0; e < equipment.length; e++) {
+        roomQuery.equalTo(equipment[e], true);
       }
     }
     return roomQuery.find();
@@ -129,7 +128,7 @@ function queryDB(date, times, size, equipment, campus_loc) {
     });*/
   }).then(function(rooms) {
     if (!rooms.length) {
-   /*   if (size == 3) {
+      /*   if (size == 3) {
         errorValue = "Sorry! No rooms are available at the specified time, date, and size you requested";
       } else {
         if (size == 1) {
@@ -179,6 +178,9 @@ function buildRoomRow(room) {
     '<span class="col-sm-2 room-row-labels">Name: <span class="room-row-content">' + name + '</span> </span>' +
     '<span class="col-sm-2 room-row-labels">Size: <span class="room-row-content">' + maxCapacity + '</span> </span>' +
     '<span class="col-sm-2 room-row-labels">Building: <span class="room-row-content">' + location + '</span> </span>' +
-    '<button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>' +
+    '<button class="btn btn-default pull-right reserve" data-target="#myModal" href="https://25live.collegenet.com/northwestern/#details&obj_type=space&obj_id=' + spaceID + '" data-toggle="modal">Reserve</button>' +
     '</div>');
+  $(".reserve").click(function() {
+    $("#live-link").attr("href", $(this).attr("href"));
+  });
 }
