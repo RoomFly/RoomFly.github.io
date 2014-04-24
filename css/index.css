@@ -26,6 +26,10 @@
 	font-weight: normal;
 }
 
+.navbar-default {
+	background-color: #428bca;
+}
+
 
 /*input[type=checkbox]
 {
