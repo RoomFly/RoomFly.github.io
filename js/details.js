@@ -5,7 +5,8 @@ $(document).ready(function(){
 
 	var today = month + '/' + day;
 	$("#day1").html(today);
-
+	newdate = new Date();
+	queryRoom("magymakaYK", newdate, 1);
 
 	for (var i=2; i<8; i++)
 	{
@@ -58,10 +59,6 @@ $(document).ready(function(){
 		queryRoom("magymakaYK", dateObj, i);
 		
 	}
-
-	newdate = new Date();
-	queryRoom("magymakaYK", newdate, 1);
-
 })
 
 function queryRoom(roomID, date, daynum) {
