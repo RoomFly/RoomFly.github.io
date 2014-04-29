@@ -2,26 +2,25 @@ Parse.initialize("VjKRngtz1yFy9XrA2YCjmnTr1Jn7XDHFBfT14zsF", "D0sZJ3i9C5NeXOIErx
 //$json = str_replace('\u0000', "", json_encode( $response ));
 //format size for db query
 
-function formatCampusLocation(campus){
-  if(campus=="No Preference"){
+function formatCampusLocation(campus) {
+  if (campus == "No Preference") {
     return null;
-  }
-  else
+  } else
     return campus;
 }
-function formatEquipment(equipment){
-  if(!equipment.length){
+
+function formatEquipment(equipment) {
+  if (!equipment.length) {
     return null;
-  }
-  else
+  } else
     return equipment;
 }
+
 function formatSize(size) {
   var num;
-  if(size=="No Preference"){
+  if (size == "No Preference") {
     num = null;
-  }
-  else{
+  } else {
     word = size.slice(0, 1);
     var num;
     if (word == "S") {
@@ -97,16 +96,16 @@ function queryDB(date, times, size, equipment, campus_loc) {
         roomIds.push(timeSlots[t].get("room_id").id);
     }
   }).then(function() { //size,location, equipment
-    roomQuery.containedIn("objectId",roomIds);
-    if(size){
-      roomQuery.equalTo("room_size",size);
+    roomQuery.containedIn("objectId", roomIds);
+    if (size) {
+      roomQuery.equalTo("room_size", size);
     }
-    if(campus_loc){
-      roomQuery.equalTo("campus_location",campus_loc);
+    if (campus_loc) {
+      roomQuery.equalTo("campus_location", campus_loc);
     }
-    if(equipment){
-      for(var e =0;e<equipment.length;e++){
-        roomQuery.equalTo(equipment[e],true);
+    if (equipment) {
+      for (var e = 0; e < equipment.length; e++) {
+        roomQuery.equalTo(equipment[e], true);
       }
     }
     return roomQuery.find();
@@ -129,7 +128,7 @@ function queryDB(date, times, size, equipment, campus_loc) {
     });*/
   }).then(function(rooms) {
     if (!rooms.length) {
-   /*   if (size == 3) {
+      /*   if (size == 3) {
         errorValue = "Sorry! No rooms are available at the specified time, date, and size you requested";
       } else {
         if (size == 1) {
@@ -175,10 +174,31 @@ function buildRoomRow(room) {
     maxCapacity = room.get("capacity"),
     spaceID = room.get("space_id"),
     location = room.get("room_location");
+  equipment = ["equip_wifi", "equip_dvd", "equip_av", "equip_computer", "equip_dc", "equip_lc", "equip_microphone"],
+  details = "";
+
+  details += "<h4>" + name + "</h4>";
+  details += "<div><label>Building:</label><span>" + location + "</span></div>";
+  details += "<div><label>Size:</label><span>" + maxCapacity + "</span></div>";
+  details += "<ul class='list-group'><a class='list-group-item active'>Equipment:</a>";
+
+  for (var i = 0; i < equipment.length; i++) {
+    if (room.get(equipment[i])) {
+      details += "<li class='list-group-item has-success'>" + equipment[i] + "</li>";
+    }
+  }
+
+  details += "</ul>"
+
   $("#room-list").append('<div class="list-group-item room-row container-fluid">' +
-    '<span class="col-sm-2 room-row-labels">Name: <span class="room-row-content">' + name + '</span> </span>' +
-    '<span class="col-sm-2 room-row-labels">Size: <span class="room-row-content">' + maxCapacity + '</span> </span>' +
-    '<span class="col-sm-2 room-row-labels">Building: <span class="room-row-content">' + location + '</span> </span>' +
-    '<button class="btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>' +
+    '<span class="col-xs-4 room-row-labels">Name: <span class="room-row-content">' + name + '</span> </span>' +
+    '<span class="col-xs-4 room-row-labels">Size: <span class="room-row-content">' + maxCapacity + '</span> </span>' +
+    '<span class="col-xs-4 room-row-labels">Building: <span class="room-row-content">' + location + '</span> </span>' +
+    '<a class="details col-xs-4" href="' + details + '" data-target="#detailsModal" data-toggle="modal">Details</a>' +
+    '<span class="col-xs-4"></span>' +
+    '<button class="col-xs-4 btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>' +
     '</div>');
+  $(".details").click(function() {
+    $("#equipment").html($(this).attr("href"));
+  });
 }

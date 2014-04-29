@@ -204,12 +204,31 @@
       </div>
     </div>
   </div>
+  <!-- Details Modal-->
+  <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Details</h4>
+        </div>
+        <div class="modal-body">
+          <div id="equipment">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Available Room List -->
   <div class="list-group" id="room-list">
     <a href="#" class="list-group-item active">
       Available Rooms
     </a>
+    <div id="banner" class="list-group-item list-group-item-warning"></div>
   </div>
 
   <script src = 'js/Query.js'></script>

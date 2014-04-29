@@ -2,7 +2,7 @@ $("#dp3").datepicker({
   minDate: 0
 });
 $("#dp3").val(getToday());
-
+$("#banner").hide();
 // var time = getCurrentTime();
 // var endtime = getEndTime(time);
 
@@ -55,7 +55,8 @@ $(".timepicker").change(function() {
 });
 
 $("#submit").click(function() {
-  $("#room-list").html('<a href="#" class="list-group-item active">Available Rooms</a>');
+  $("#room-list").html('<a href="#" class="list-group-item active">Available Rooms</a><div id="banner" class="list-group-item list-group-item-warning"></div>');
+  $("#banner").hide();
   var filterVars = getFilterVals();
   runQueries(filterVars);
 });
