@@ -159,7 +159,7 @@ function queryDB(date, times, size, equipment, campus_loc) {
     } 
     else {
       if(bannerValue){
-        console.log(bannerValue);
+        $("#banner").text(bannerValue)
       }
       if(val.length){
         $('#filter-collapse').collapse('hide');
@@ -171,7 +171,7 @@ function queryDB(date, times, size, equipment, campus_loc) {
   });
 }
 
-function buildRoomRow(room) {
+function buildRoomRow(room,bV) {
   var name = room.get("room_name"),
     size = room.get("room_size"),
     maxCapacity = room.get("capacity"),
