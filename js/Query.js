@@ -116,8 +116,10 @@ function queryDB(date, times, size, equipment, campus_loc) {
       newQuery.containedIn("objectId",roomIds);
       if (equipment){
         bannerValue= "We didn't find any rooms with your specific equipment requirements but these rooms are similar.";
-        newQuery.equalTo("room_size",size);
-        newQuery.equalTo("campus_location",campus_loc);
+        if(size)
+          newQuery.equalTo("room_size",size);
+        if(campus_loc)
+          newQuery.equalTo("campus_location",campus_loc);
       }
       if(size && !equipment){//permutations where room_size was selected but not equipment and possibly campus location
         if(size==3){
@@ -128,7 +130,7 @@ function queryDB(date, times, size, equipment, campus_loc) {
             bannerValue ="We didn't find rooms with the size you chose on "+campus_loc+" campus so we searched on "+ cl2+" campus";
           }
           else
-            errorValue="Sorry there are no rooms of this size available";
+            errorValue="Sorry there are no rooms of this size available at the time selected";
         }
         else{
           if(size==1){
@@ -139,6 +141,9 @@ function queryDB(date, times, size, equipment, campus_loc) {
           }
           newQuery.greaterThanOrEqualTo("room_size", size2);
           newQuery.ascending('capacity');
+          if(campus_loc){
+            newQuery.equalTo("campus_location",campus_loc);
+          }
           bannerValue = "We didn't find rooms with the size you chose so we looked for larger rooms";
         }
       }
@@ -159,7 +164,8 @@ function queryDB(date, times, size, equipment, campus_loc) {
     } 
     else {
       if(bannerValue){
-        $("#banner").text(bannerValue)
+        $("#banner").show();
+        $("#banner").text(bannerValue);
       }
       if(val.length){
         $('#filter-collapse').collapse('hide');
@@ -171,28 +177,32 @@ function queryDB(date, times, size, equipment, campus_loc) {
   });
 }
 
-function buildRoomRow(room,bV) {
+function buildRoomRow(room) {
   var name = room.get("room_name"),
     size = room.get("room_size"),
     maxCapacity = room.get("capacity"),
     spaceID = room.get("space_id"),
     location = room.get("room_location"),
-  equipment = ["equip_wifi", "equip_dvd", "equip_av", "equip_computer", "equip_dc", "equip_lc", "equip_microphone"],
+  //equipment = ["equip_wifi", "equip_dvd", "equip_av", "equip_computer", "equip_dc", "equip_lc", "equip_microphone"],
+  equipment = {"equip_wifi":"Wifi","equip_dvd":"DVD","equip_av":"AV","equip_computer":"Computer Equipment","equip_dc":"Document Camera","equip_lc":"Laptop Connection","equip_microphone":"Microphone"}
   details = "";
 
   details += "<h4>" + name + "</h4>";
   details += "<div><label>Building:</label><span>" + location + "</span></div>";
   details += "<div><label>Size:</label><span>" + maxCapacity + "</span></div>";
   details += "<ul class='list-group'><a class='list-group-item active'>Equipment:</a>";
-
+/*
   for (var i = 0; i < equipment.length; i++) {
     if (room.get(equipment[i])) {
       details += "<li class='list-group-item has-success'>" + equipment[i] + "</li>";
     }
+  }*/
+  for (var prop in equipment){
+    if(room.get(prop)){
+      details += "<li class='list-group-item has-success'>" + equipment[prop] + "</li>";
+    }
   }
-
   details += "</ul>"
-
   $("#room-list").append('<div class="list-group-item room-row container-fluid">' +
     '<span class="col-xs-4 room-row-labels">Name: <span class="room-row-content">' + name + '</span> </span>' +
     '<span class="col-xs-4 room-row-labels">Size: <span class="room-row-content">' + maxCapacity + '</span> </span>' +
