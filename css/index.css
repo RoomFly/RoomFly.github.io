@@ -25,3 +25,34 @@
 .room-row-content {
 	font-weight: normal;
 }
+
+.navbar-default {
+	background-color: #428bca;
+}
+
+
+/*input[type=checkbox]
+{
+ -ms-transform: scale(2); 
+ -moz-transform: scale(2); 
+ -webkit-transform: scale(2,2); 
+ -o-transform: scale(2); 
+ padding: 10px;
+}*/
+
+ /* Double-sized Checkboxes */
+ /* IE */
+ /* FF */
+/* Safari and Chrome */
+/* Opera */
+
+
+/*.mycheckbox {
+	padding: 3px;
+	margin-left: 30px;
+}
+
+.myequi {
+	padding-left: 10px;
+	font-size: 15px;
+}*/
