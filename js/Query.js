@@ -184,7 +184,7 @@ function buildRoomRow(room) {
     spaceID = room.get("space_id"),
     location = room.get("room_location"),
   //equipment = ["equip_wifi", "equip_dvd", "equip_av", "equip_computer", "equip_dc", "equip_lc", "equip_microphone"],
-  equipment = {"equip_wifi":"Wifi","equip_dvd":"DVD","equip_av":"AV","equip_computer":"Computer Equipment","equip_dc":"Document Camera","equip_lc":"Laptop Connection","equip_microphone":"Microphone"}
+  equipment = {"equip_wifi":"Wifi","equip_dvd":"DVD","equip_av":"Projector and Audio","equip_computer":"Computer Equipment","equip_dc":"Document Camera","equip_lc":"Laptop Connection","equip_microphone":"Microphone"}
   details = "";
 
   details += "<h4>" + name + "</h4>";
