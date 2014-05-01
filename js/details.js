@@ -93,7 +93,7 @@ function queryRoom(roomID, date, daynum) {
 				// console.log(element);
 				$(element).addClass("colored");
 			}
-			if (timeArray[i+1] == true) {
+			if (timeArray[i+1] == false) {
 				element = id + " " + dayclass + " " + ".time2";
 				// console.log(element);
 				$(element).addClass("colored");
