@@ -12,10 +12,12 @@
 
 td {
 	height:40px;
+	border:1px solid #ddd;
 }
 
 th {
 	padding:0;
+	border:1px solid #ddd;
 }
 
 .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
