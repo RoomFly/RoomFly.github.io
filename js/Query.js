@@ -80,7 +80,8 @@ function queryDB(date, times, size, equipment, campus_loc) {
     timeQuery = new Parse.Query(Time_Table),
     availableRooms = [],
     roomIds = [],
-    errorValue;
+    errorValue=null,
+    bannerValue=null;
 
   //Time and date query
   timeQuery.equalTo("year", date.getFullYear());
@@ -109,61 +110,69 @@ function queryDB(date, times, size, equipment, campus_loc) {
       }
     }
     return roomQuery.find();
-    /*sizeQuery = roomQuery;
-    sizeQuery.equalTo("room_size",size);
-   //base set with roomIds with correct date and time
-    
-    locQuery = roomQuery;
-    locQuery.containedIn("objectId", roomIds);
-    
-    if(equipment){
-      
-      for(var e = 0;e<equipment.length;e++){
-        equipQuery.equalTo(equipment[e],true);
-      } 
-      
-    }
-    sizeQuery.find().then(function(sizes){
-
-    });*/
   }).then(function(rooms) {
     if (!rooms.length) {
-      /*   if (size == 3) {
-        errorValue = "Sorry! No rooms are available at the specified time, date, and size you requested";
-      } else {
-        if (size == 1) {
-          size2 = 2;
-          alert("There is no rooms available at the specified size, but we will search other size of rooms to let you choose")
-        } else if (size == 2) {
-          size2 = 3;
-          alert("There is no rooms available at the specified size, but we will search other size of rooms to let you choose")
+      var newQuery= new Parse.Query(Rooms);
+      newQuery.containedIn("objectId",roomIds);
+      if (equipment){
+        bannerValue= "We didn't find any rooms with your specific equipment requirements but these rooms are similar.";
+        if(size)
+          newQuery.equalTo("room_size",size);
+        if(campus_loc)
+          newQuery.equalTo("campus_location",campus_loc);
+      }
+      if(size && !equipment){//permutations where room_size was selected but not equipment and possibly campus location
+        if(size==3){
+          if(campus_loc){
+            cl2 = campus_loc =="North"?"South":"North";
+            newQuery.equalTo("room_size",size);
+            newQuery.equalTo("campus_location",cl2);
+            bannerValue ="We didn't find rooms with the size you chose on "+campus_loc+" campus so we searched on "+ cl2+" campus";
+          }
+          else
+            errorValue="Sorry there are no rooms of this size available at the time selected";
         }
-        var aroom = [];
-        var newQuery = new Parse.Query(Rooms);
-        newQuery.greaterThanOrEqualTo("room_size", size2);
-        newQuery.containedIn("objectId", roomIds);
-        newQuery.ascending('capacity');
-        rooms = newQuery.find();
-      }*/
-      errorValue = 'Sorry there are no rooms with these specific spec';
+        else{
+          if(size==1){
+            size2=2;
+          }
+          else if(size==2){
+            size2=3;
+          }
+          newQuery.greaterThanOrEqualTo("room_size", size2);
+          newQuery.ascending('capacity');
+          if(campus_loc){
+            newQuery.equalTo("campus_location",campus_loc);
+          }
+          bannerValue = "We didn't find rooms with the size you chose so we looked for larger rooms";
+        }
+      }
+      if(campus_loc && !size && !equipment){//permuations where campus_loc was selected but not room_size and not equipment
+        var cl2="North";
+        if(campus_loc=="North"){
+          cl2="South"
+        }
+        newQuery.equalTo("campus_location",cl2);
+        bannerValue="We didn't find any rooms on "+campus_loc+" campus so we searched for rooms on "+ cl2+ "campus";
+      }
+      return newQuery.find();
     }
-    return {
-      error: errorValue,
-      available: rooms
-    };
+    return rooms;
   }).then(function(val) { //Display the information for the user
-    if (val.error) {
-      alert(val.error);
-    } else {
-      var ava = val.available;
-      return ava;
-    }
-  }).then(function(roomava) {
-    if (roomava.length > 0) {
-      $('#filter-collapse').collapse('hide');
-    }
-    for (var r = 0; r < roomava.length; r++) {
-      buildRoomRow(roomava[r]);
+    if (errorValue) {
+      alert(errorValue);
+    } 
+    else {
+      if(bannerValue){
+        $("#banner").show();
+        $("#banner").text(bannerValue);
+      }
+      if(val.length){
+        $('#filter-collapse').collapse('hide');
+        for(var r=0;r<val.length;r++){
+          buildRoomRow(val[r]);
+        }
+      }
     }
   });
 }
@@ -173,23 +182,27 @@ function buildRoomRow(room) {
     size = room.get("room_size"),
     maxCapacity = room.get("capacity"),
     spaceID = room.get("space_id"),
-    location = room.get("room_location");
-  equipment = ["equip_wifi", "equip_dvd", "equip_av", "equip_computer", "equip_dc", "equip_lc", "equip_microphone"],
+    location = room.get("room_location"),
+  //equipment = ["equip_wifi", "equip_dvd", "equip_av", "equip_computer", "equip_dc", "equip_lc", "equip_microphone"],
+  equipment = {"equip_wifi":"Wifi","equip_dvd":"DVD","equip_av":"Projector and Audio","equip_computer":"Computer Equipment","equip_dc":"Document Camera","equip_lc":"Laptop Connection","equip_microphone":"Microphone"}
   details = "";
 
   details += "<h4>" + name + "</h4>";
   details += "<div><label>Building:</label><span>" + location + "</span></div>";
   details += "<div><label>Size:</label><span>" + maxCapacity + "</span></div>";
   details += "<ul class='list-group'><a class='list-group-item active'>Equipment:</a>";
-
+/*
   for (var i = 0; i < equipment.length; i++) {
     if (room.get(equipment[i])) {
       details += "<li class='list-group-item has-success'>" + equipment[i] + "</li>";
     }
+  }*/
+  for (var prop in equipment){
+    if(room.get(prop)){
+      details += "<li class='list-group-item has-success'>" + equipment[prop] + "</li>";
+    }
   }
-
   details += "</ul>"
-
   $("#room-list").append('<div class="list-group-item room-row container-fluid">' +
     '<span class="col-xs-4 room-row-labels">Name: <span class="room-row-content">' + name + '</span> </span>' +
     '<span class="col-xs-4 room-row-labels">Size: <span class="room-row-content">' + maxCapacity + '</span> </span>' +
