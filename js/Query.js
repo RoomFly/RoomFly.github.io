@@ -178,10 +178,11 @@ function queryDB(date, times, size, equipment, campus_loc) {
 }
 
 function buildRoomRow(room) {
+  console.log(room.id)
   var name = room.get("room_name"),
     size = room.get("room_size"),
     maxCapacity = room.get("capacity"),
-    spaceID = room.get("space_id"),
+    roomID = room.id,
     location = room.get("room_location"),
   //equipment = ["equip_wifi", "equip_dvd", "equip_av", "equip_computer", "equip_dc", "equip_lc", "equip_microphone"],
   equipment = {"equip_wifi":"Wifi","equip_dvd":"DVD","equip_av":"Projector and Audio","equip_computer":"Computer Equipment","equip_dc":"Document Camera","equip_lc":"Laptop Connection","equip_microphone":"Microphone"}
@@ -210,6 +211,8 @@ function buildRoomRow(room) {
     '<a class="details col-xs-4" href="' + details + '" data-target="#detailsModal" data-toggle="modal">Details</a>' +
     '<span class="col-xs-4"></span>' +
     '<button class="col-xs-4 btn btn-default pull-right" data-target="#myModal" data-toggle="modal">Reserve</button>' +
+    '<a class="details col-xs-4" href="details.html?roomid=' + roomID + '">View Calendar</a>' +
+    '<span class="col-xs-4"></span>' +
     '</div>');
   $(".details").click(function() {
     $("#equipment").html($(this).attr("href"));

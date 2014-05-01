@@ -6,7 +6,11 @@ $(document).ready(function(){
 	var today = month + '/' + day;
 	$("#day1").html(today);
 	newdate = new Date();
-	queryRoom("magymakaYK", newdate, 1);
+
+	roomID = getRoomID('roomid');
+	console.log(roomID);
+
+	queryRoom(roomID, newdate, 1);
 
 	for (var i=2; i<8; i++)
 	{
@@ -54,16 +58,16 @@ $(document).ready(function(){
 		var dateObj = new Date();
 		dateObj.setMonth(month-1);
 		dateObj.setDate(day);
-		console.log(dateObj);
-		console.log(i);
-		queryRoom("magymakaYK", dateObj, i);
+		// console.log(dateObj);
+		// console.log(i);
+		queryRoom(roomID, dateObj, i);
 		
 	}
 })
 
 function queryRoom(roomID, date, daynum) {
-	console.log(date.getMonth());
-	console.log(date.getDate());
+	// console.log(date.getMonth());
+	// console.log(date.getDate());
 
 	var Time_Table = Parse.Object.extend("Time_Table"),
 	timeQuery = new Parse.Query(Time_Table),
@@ -77,21 +81,21 @@ function queryRoom(roomID, date, daynum) {
 		timeQuery.equalTo("day",date.getDate());
 		return timeQuery.find()
   	}).then(function(result){
-  		console.log(result);
+  		// console.log(result);
 	  	var timeArray = getTimeArray(result);
-	  	console.log(timeArray);
+	  	// console.log(timeArray);
 	  	var hour = 8;
 		var dayclass = ".day-" + daynum;
 	  	for (var i=0; i<timeArray.length; i=i+2) {
 			var id = "#" + hour;
 			if (timeArray[i] == true) {
 				element = id + " " + dayclass + " " + ".time1";
-				console.log(element);
+				// console.log(element);
 				$(element).addClass("colored");
 			}
 			if (timeArray[i+1] == true) {
 				element = id + " " + dayclass + " " + ".time2";
-				console.log(element);
+				// console.log(element);
 				$(element).addClass("colored");
 			}
 			hour = hour + 1;
@@ -99,11 +103,21 @@ function queryRoom(roomID, date, daynum) {
   	});
 }
 
+function getRoomID(searchID) {
+	var searchString = window.location.search.substring(1);
+	// console.log(searchString);
+	var keyVal = searchString.split('=');
+	// console.log(keyVal)
+	if (keyVal[0] == searchID) {
+		return keyVal[1];
+	}
+}
+
 function getTimeArray(resultObject) {
 	var result = resultObject[0];
 	var timeArr = new Array();
-	console.log(result);
-	console.log(result.get("T8_30"));
+	// console.log(result);
+	// console.log(result.get("T8_30"));
 	timeArr.push(result.get("T9_00"));
 	timeArr.push(result.get("T9_30"));
 	timeArr.push(result.get("T10_00"));
