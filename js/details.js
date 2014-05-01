@@ -88,7 +88,7 @@ function queryRoom(roomID, date, daynum) {
 		var dayclass = ".day-" + daynum;
 	  	for (var i=0; i<timeArray.length; i=i+2) {
 			var id = "#" + hour;
-			if (timeArray[i] == true) {
+			if (timeArray[i] == false) {
 				element = id + " " + dayclass + " " + ".time1";
 				// console.log(element);
 				$(element).addClass("colored");
