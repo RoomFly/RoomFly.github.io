@@ -118,6 +118,7 @@ function getTimeArray(resultObject) {
 	var timeArr = new Array();
 	// console.log(result);
 	// console.log(result.get("T8_30"));
+	timeArr.push(result.get("T8_30"));
 	timeArr.push(result.get("T9_00"));
 	timeArr.push(result.get("T9_30"));
 	timeArr.push(result.get("T10_00"));
