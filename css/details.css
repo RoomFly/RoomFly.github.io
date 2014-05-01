@@ -1,5 +1,5 @@
 .table {
-	font-size: x-small;
+	font-size: small;
 }
 
 .colored {
@@ -12,6 +12,10 @@
 
 td {
 	height:40px;
+}
+
+th {
+	padding:0;
 }
 
 .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
