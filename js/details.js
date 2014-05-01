@@ -86,6 +86,7 @@ function queryRoom(roomID, date, daynum) {
 	  	// console.log(timeArray);
 	  	var hour = 8;
 		var dayclass = ".day-" + daynum;
+		// console.log(timeArray)
 	  	for (var i=0; i<timeArray.length; i=i+2) {
 			var id = "#" + hour;
 			if (timeArray[i] == false) {
